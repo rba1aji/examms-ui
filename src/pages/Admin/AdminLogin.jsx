@@ -4,11 +4,13 @@ import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { ADMIN_LOGIN } from "../../reducers/ApiEndPoints";
 import Cookies from "js-cookie";
+import { AppState } from "../../reducers/AppContextProvider";
 
 export default function AdminLogin() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate();
+    const { setUserRole, setAuthtoken } = AppState();
 
     function handleLogin(e) {
         e.preventDefault();
@@ -26,9 +28,10 @@ export default function AdminLogin() {
             .then(function (res) {
                 var data = res?.data?.data;
                 Cookies.set("authtoken", data?.token);
-                navigate('/' + data?.role + '/workspace');
-                window.location.reload();
                 Cookies.set('userRole', data?.role);
+                navigate('/' + data?.role + '/workspace');
+                setUserRole(data?.role);
+                setAuthtoken(data?.token);
             })
             .catch(function (err) {
                 alert(err.response?.data.message)

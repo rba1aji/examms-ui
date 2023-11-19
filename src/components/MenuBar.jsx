@@ -2,10 +2,12 @@ import { Navbar, Container, Nav } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Login from './Login'
 import LoggedinMenu from './LoggedinMenu'
-import Cookies from 'js-cookie'
 import { APP_LOGO } from '../reducers/Utils'
+import { AppState } from '../reducers/AppContextProvider'
 
 export default function MenuBar() {
+  const { authtoken } = AppState();
+
   return (
     <>
       <Navbar collapseOnSelect bg="info" expand="lg" fixed="top" className=''>
@@ -45,7 +47,7 @@ export default function MenuBar() {
             <Nav className="ms-auto text-white text-bolder">
 
               {
-                Cookies.get('authtoken') ? <LoggedinMenu /> : <Login />
+                authtoken ? <LoggedinMenu /> : <Login />
               }
 
             </Nav>

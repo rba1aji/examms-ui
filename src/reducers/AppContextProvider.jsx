@@ -1,7 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import axios from "axios";
-import { useEffect } from "react";
-import { GET_ALL_DEPARTMENT } from "./ApiEndPoints";
 import Cookies from "js-cookie";
 
 const AppContext = createContext();
@@ -9,9 +6,8 @@ const AppContext = createContext();
 const AppContextProvider = ({ children }) => {
     const [menuLoginType, setMenuLoginType] = useState();
     const [user, setUser] = useState();
-    const [userRole, setUserRole] = useState(
-        // window.sessionStorage.getItem('userRole')
-    );
+    const [userRole, setUserRole] = useState(Cookies.get('userRole'));
+    const [authtoken, setAuthtoken] = useState(Cookies.get('authtoken'));
 
 
     return (
@@ -20,7 +16,7 @@ const AppContextProvider = ({ children }) => {
                 menuLoginType, setMenuLoginType,
                 user, setUser,
                 userRole, setUserRole,
-                // token, setToken
+                authtoken, setAuthtoken
             }}
         >
             {children}

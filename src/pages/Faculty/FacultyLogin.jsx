@@ -10,6 +10,7 @@ export default function FacultyLogin() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate();
+    const { setUserRole, setAuthtoken } = AppState();
 
     function handleLogin(e) {
         e.preventDefault();
@@ -25,9 +26,10 @@ export default function FacultyLogin() {
             .then((res) => {
                 var data = res?.data?.data;
                 Cookies.set("authtoken", data?.token);
-                navigate('/' + data?.role + '/workspace');
-                window.location.reload();
                 Cookies.set('userRole', data?.role);
+                navigate('/' + data?.role + '/workspace');
+                setUserRole(data?.role);
+                setAuthtoken(data?.token);
             })
             .catch(function (err) {
                 console.log(err);

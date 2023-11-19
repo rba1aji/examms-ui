@@ -1,9 +1,11 @@
 import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { AppState } from "../reducers/AppContextProvider";
 
 export default function LoggedinMenu() {
     const navigate = useNavigate();
+    const { userRole, setAuthtoken, setUserRole } = AppState();
 
     return (
         <>
@@ -15,13 +17,14 @@ export default function LoggedinMenu() {
                 onClick={() => {
                     Cookies.remove('authtoken');
                     navigate('/');
-                    window.location.reload();
+                    setAuthtoken();
+                    setUserRole();
                 }}
             >
                 Logout
             </Button>
 
-            <Button as={Link} to={Cookies.get('userRole') + '/workspace'} variant="dark" className="my-1 ">
+            <Button as={Link} to={userRole + '/workspace'} variant="dark" className="my-1 ">
                 Workspace
             </Button>
         </>

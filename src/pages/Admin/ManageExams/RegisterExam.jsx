@@ -37,9 +37,7 @@ function MyVerticallyCenteredModal(props) {
         await axios({
             method: 'post',
             url: ADD_UPDATE_EXAM,
-            data: {
-                exam: ({ ...newExam, departments: selectedDepartments?.join(",") })
-            },
+            data: { ...newExam, departments: selectedDepartments?.join(",") },
             headers: {
                 Authorization: "Bearer " + Cookies.get('authtoken')
             }
@@ -108,7 +106,7 @@ function MyVerticallyCenteredModal(props) {
                                         placeholder: 'Exam for which sem',
                                         type: 'number',
                                         value: newExam.semester,
-                                        onChange: (e) => setNewExam({ ...newExam, semester: e.target.value }),
+                                        onChange: (e) => setNewExam({ ...newExam, semester: parseInt(e.target.value) }),
                                         required: true
                                     },
                                     {
