@@ -1,0 +1,32 @@
+// export const serverurl = process.env.REACT_APP_SERVER_URL;
+export const BASE_URL = "http://localhost:7001/api"
+
+//login
+export const STUDENT_LOGIN = BASE_URL + "/auth/v1/student-login"
+export const ADMIN_LOGIN = BASE_URL + "/auth/v1/admin-login"
+export const FACULTY_LOGIN = BASE_URL + "/auth/v1/faculty-login"
+
+export const GET_ALL_STUDENTS = BASE_URL + "/student/v1/get-all-students";
+export const GET_ALL_FACULTIES = BASE_URL + "/faculty/v1/get-all-faculties";
+export const GET_ALL_COURSES = BASE_URL + "/course/v1/get-all-courses";
+export const GET_ALL_DEPARTMENT = BASE_URL + "/department/v1/get-all-department";
+export const GET_ALL_MARKS = BASE_URL + "/marks/v1/get-all-marks";
+export const GET_ALL_EXAM = BASE_URL + "/exam/v1/get-all-exam";
+export const GET_ALL_EXAMBATCH = BASE_URL + "/exam-batch/v1/get-all-exam-batch";
+export const GET_ALL_MARKS_FOR_EXAM_BATCH = BASE_URL + "/marks/v1/get-all-marks-for-exam-batch";
+export const GET_EXAM_BATCH = BASE_URL + "/exam-batch/v1/get-exam-batch";
+
+export const EXCEL_REGISTER_STUDENTS = BASE_URL + "/registration/v1/excel-register-students";
+export const EXCEL_REGISTER_FACULTIES = BASE_URL + "/registration/v1/excel-register-faculties";
+export const EXCEL_REGISTER_COURSES = BASE_URL + "/registration/v1/excel-register-courses";
+export const SAVE_UPDATE_COURSES = BASE_URL + "/registration/v1/save-update-course";
+export const ADD_UPDATE_EXAM = BASE_URL + "/exam/v1/add-update-exam";
+export const ADD_UPDATE_EXAMBATCH = BASE_URL + "/exam-batch/v1/add-update-exam-batch";
+
+export const ADD_UPDATE_MARKS_LIST = BASE_URL + "/marks/v1/add-update-marks-list";
+
+export const GET_ACTIVE_EXAM_BATCHES = BASE_URL + "/faculty/v1/get-active-exam-batches";
+
+export const CHANGE_PASSOWRD = BASE_URL + "/auth/v1/change-password";
+
+export const GET_STUDENT_PROFILE = BASE_URL + "/student/v1/get-profile";
