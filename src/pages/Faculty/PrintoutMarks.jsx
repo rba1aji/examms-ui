@@ -5,7 +5,7 @@ import ExamData from './ExamData';
 import { useParams } from 'react-router-dom';
 import { attendanceConfig, numbersToWords, } from '../../reducers/Utils';
 
-export default function PrintoutAttendance() {
+export default function PrintoutMarks() {
     const [examBatch, setExamBatch] = useState({});
     const [studentMarks, setStudentMarks] = useState([]);
 

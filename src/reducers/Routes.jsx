@@ -3,11 +3,11 @@ import AdminWorkspace from "../pages/Admin/AdminWorkspace";
 import Exam from "../pages/Faculty/Exam";
 import FacultyLogin from "../pages/Faculty/FacultyLogin";
 import { FacultyWorkspace } from "../pages/Faculty/FacultyWorkspace";
-import PrintoutAttendance from "../pages/Faculty/PrintOutAttendance";
-import MarksPrintout from "../pages/Faculty/PrintoutMarks";
 import Home from "../pages/Home"
 import StudentLogin from "../pages/student/StudentLogin"
 import StudentWorkspace from "../pages/student/StudentWorkspace";
+import PrintoutAttendance from '../pages/Faculty/PrintoutAttendance';
+import PrintoutMarks from "../pages/Faculty/PrintoutMarks";
 
 export const loginRoutes = [
     {
@@ -48,13 +48,13 @@ export const facultyWorkspaceRoutes = [
     },
     {
         path: '/faculty/exam/:examBatchId/print-1',
-        title: 'Print Result 1',
+        title: 'Printout Attendance',
         component: <PrintoutAttendance />
     },
     {
         path: '/faculty/exam/:examBatchId/print-2',
-        title: 'Print Result 2',
-        component: <MarksPrintout />
+        title: 'Printout Marks',
+        component: <PrintoutMarks />
     }
 ];
 
