@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { GET_ALL_COURSES } from "../../../reducers/ApiEndPoints";
+import Cookies from "js-cookie";
 
 export default function CourseTable() {
     const [courses, setCourses] = useState([]);
@@ -10,6 +11,9 @@ export default function CourseTable() {
         axios({
             method: 'GET',
             url: GET_ALL_COURSES,
+            headers: {
+                Authorization: "Bearer " + Cookies.get('authtoken')
+            }
         })
             .then(res => setCourses(res.data.data))
             .catch(err => alert(err.response.data.message))

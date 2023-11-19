@@ -2,6 +2,7 @@ import { Table } from "react-bootstrap"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { GET_ALL_FACULTIES } from "../../../reducers/ApiEndPoints";
+import Cookies from "js-cookie";
 
 export default function FacultiesTable() {
     const [data, setData] = useState([]);
@@ -10,6 +11,9 @@ export default function FacultiesTable() {
         axios({
             method: 'get',
             url: GET_ALL_FACULTIES,
+            headers: {
+                Authorization: "Bearer " + Cookies.get('authtoken')
+            }
         })
             .then((res) => {
                 setData(res?.data?.data)

@@ -1,21 +1,19 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { AppState } from '../../../reducers/AppContextProvider';
 import axios from 'axios';
-import { ADD_UPDATE_EXAM } from '../../../reducers/ApiEndPoints';
+import { ADD_UPDATE_EXAM, GET_ALL_DEPARTMENT } from '../../../reducers/ApiEndPoints';
+import Cookies from 'js-cookie';
 
 function MyVerticallyCenteredModal(props) {
-    const { degrees } = AppState();
     const [newExam, setNewExam] = useState({
         id: '',
         name: '',
         semester: '',
         batch: ''
     });
-    const [selectedDegree, setSelectedDegree] = useState([]);
-    const [selectedBranch, setSelectedBranch] = useState([]);
+    const [selectedDepartments, setSelectedDepartments] = useState([]);
     const { onHide } = props;
     const [departments, setDepartments] = useState([]);
 
@@ -28,7 +26,7 @@ function MyVerticallyCenteredModal(props) {
             }
         })
             .then((res) => {
-                setDepartments(res.data.data)
+                setDepartments(res.data?.data)
             })
             .catch((err) => console.log(err));
     }, []);
@@ -36,13 +34,11 @@ function MyVerticallyCenteredModal(props) {
 
     async function handleRegisterExam(e) {
         e.preventDefault();
-        console.log(newExam, selectedBranch);
         await axios({
             method: 'post',
             url: ADD_UPDATE_EXAM,
             data: {
-                exam: newExam,
-                branchidList: selectedBranch
+                exam: ({ ...newExam, departments: selectedDepartments?.join(",") })
             },
             headers: {
                 Authorization: "Bearer " + Cookies.get('authtoken')
@@ -151,7 +147,7 @@ function MyVerticallyCenteredModal(props) {
                                     type='text'
                                 />
                             </Form.Group> */}
-                            <Form.Group className="mb-3" style={{
+                            {/* <Form.Group className="mb-3" style={{
                             }}>
                                 <Form.Label>Degrees</Form.Label>
                                 <div style={{
@@ -175,29 +171,31 @@ function MyVerticallyCenteredModal(props) {
                                         />
                                     ))}
                                 </div>
-                            </Form.Group>
+                            </Form.Group> */}
                             <Form.Group className="mb-3">
                                 <Form.Label>Branches</Form.Label>
                                 <div style={{
                                     fontSize: '80%',
                                 }}>
-                                    {departments?.filter(b => selectedDegree.includes(b.degreeid)).map((item, ind) => (
-                                        <Form.Check
-                                            key={ind}
-                                            inline
-                                            type={'checkbox'}
-                                            label={item.id}
-                                            value={item.id}
-                                            onChange={(e) => {
-                                                setSelectedBranch(prev => {
-                                                    return selectedBranch.includes(e.target.value) ?
-                                                        selectedBranch.filter(item => item !== e.target.value) :
-                                                        [...prev, e.target.value]
-                                                })
-                                            }}
-                                            checked={selectedBranch.includes(item.id)}
-                                        />
-                                    ))}
+                                    {departments?.
+                                        // filter(b => selectedDegree.includes(b.degreeid)).
+                                        map((item, ind) => (
+                                            <Form.Check
+                                                key={ind}
+                                                inline
+                                                type={'checkbox'}
+                                                label={item.code}
+                                                value={item.code}
+                                                onChange={(e) => {
+                                                    setSelectedDepartments(prev => {
+                                                        return selectedDepartments.includes(e.target.value) ?
+                                                            selectedDepartments.filter(item => item !== e.target.value) :
+                                                            [...prev, e.target.value]
+                                                    })
+                                                }}
+                                                checked={selectedDepartments.includes(item.code)}
+                                            />
+                                        ))}
                                 </div>
                             </Form.Group>
 

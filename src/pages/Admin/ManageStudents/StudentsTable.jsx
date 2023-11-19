@@ -2,6 +2,7 @@ import { Table } from "react-bootstrap"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import * as api from '../../../reducers/ApiEndPoints'
+import Cookies from "js-cookie";
 
 export default function StudentsTable() {
     const [data, seData] = useState([]);

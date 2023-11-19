@@ -1,10 +1,10 @@
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
-import { AppState } from '../../../reducers/AppContextProvider';
 import axios from 'axios';
-import { SAVE_UPDATE_COURSES } from '../../../reducers/ApiEndPoints';
+import { GET_ALL_DEPARTMENT, SAVE_UPDATE_COURSES } from '../../../reducers/ApiEndPoints';
+import Cookies from 'js-cookie';
 
 function MyVerticallyCenteredModal(props) {
     const [newCourse, setNewCourse] = useState({

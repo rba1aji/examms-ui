@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { GET_ALL_EXAM } from "../../../reducers/ApiEndPoints";
+import Cookies from "js-cookie";
 
 export default function SelectExam(props) {
     const [exams, setExams] = useState([]);
@@ -19,10 +20,10 @@ export default function SelectExam(props) {
             }
         })
             .then(res => {
-                setExams(res.data.data)
-                console.log("exams are fetched", res.data.data);
+                setExams(res.data?.data)
+                console.log(res?.data?.message);
             })
-            .catch(err => alert(err.response.data.message))
+            .catch(err => alert(err?.response?.data.message))
     }, []);
 
 
