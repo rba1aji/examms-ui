@@ -79,7 +79,9 @@ function MyVerticallyCenteredModal(props) {
                     </Form>
                 </div>
                 <br />
-                {`file column names should be: { id, password, fullname, department, designation, email, phone } `}
+                <a href='/public/exceltemplates/FacultyExcelRegister.xlsx'>faculty excel register template</a>
+                <br />
+                {`Row should be: { username, password, fullName, designation, department, phone, email } `}
             </Modal.Body>
         </Modal >
     );
