@@ -3,6 +3,7 @@ import { Form, Table } from "react-bootstrap";
 import { AppState } from "../../reducers/AppContextProvider";
 import axios from "axios";
 import { serverurl } from "../../reducers/Constants";
+import Cookies from "js-cookie";
 
 export default function ViewExamMarks() {
     const [exams, setExams] = useState([]);
