@@ -6,6 +6,7 @@ import axios from 'axios';
 import { displayDDMMYYYHHMMSS } from '../../../reducers/Utils';
 import CreateOrEditBatch from './CreateOrEditBatch';
 import { GET_ALL_EXAMBATCH } from '../../../reducers/ApiEndPoints';
+import Cookies from 'js-cookie';
 
 function MyVerticallyCenteredModal(props) {
     const { selectedCourse, selectedExam, examBatches, setExamBatches } = props;
