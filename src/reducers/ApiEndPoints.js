@@ -1,5 +1,6 @@
 // export const serverurl = process.env.SPRINGBOOT_SERVER_URL;
-export const BASE_URL = "https://examms-springboot.onrender.com/api";
+// export const BASE_URL = "https://examms-springboot.onrender.com/api";
+export const BASE_URL = "http://localhost:7001/api";
 
 //login
 export const STUDENT_LOGIN = BASE_URL + "/auth/v1/student-login"
@@ -30,3 +31,5 @@ export const GET_ACTIVE_EXAM_BATCHES = BASE_URL + "/faculty/v1/get-active-exam-b
 export const CHANGE_PASSOWRD = BASE_URL + "/auth/v1/change-password";
 
 export const GET_STUDENT_PROFILE = BASE_URL + "/student/v1/get-profile";
+
+export const EXAM_MARKS_REPORT = BASE_URL + "/report/v1/exam-marks-report";
