@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
 import { attendanceConfig, numbersToWords } from "../../../reducers/Utils";
 import { GET_ALL_MARKS } from "../../../reducers/ApiEndPoints";
+import Cookies from "js-cookie";
 
 export default function BatchStudentsTable(props) {
     const { selectedBatch } = props;
