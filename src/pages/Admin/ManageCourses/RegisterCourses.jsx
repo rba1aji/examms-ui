@@ -12,11 +12,11 @@ function MyVerticallyCenteredModal(props) {
 
     function handleRegisterMultiple(e) {
         e.preventDefault();
-        onHide();
         if (file && !(file.name?.endsWith(".csv") || file.name?.endsWith(".xlsx"))) {
             alert("Please upload a valid file");
             return;
         }
+        onHide();
 
         const formData = new FormData();
         formData.append('file', file);
@@ -33,7 +33,7 @@ function MyVerticallyCenteredModal(props) {
                 alert(response?.data?.message);
             })
             .catch((error) => {
-                alert(error.response.data.message);
+                alert(error.response?.data.message);
             });
     }
 
@@ -81,7 +81,9 @@ function MyVerticallyCenteredModal(props) {
                     </Form>
                 </div>
                 <br />
-                <a href='/public/exceltemplates/CourseExcelRegister.xlsx'>Course excel register template</a>
+                <a
+                    target='_blank'
+                    href={'https://docs.google.com/spreadsheets/d/1kyWykRCjmF7dj1wQ0WslCUwJWIwL-R_2/edit?usp=sharing&ouid=112743947420918199538&rtpof=true&sd=true'}>Course excel register template</a>
                 <br />
                 {`Row should be: { courseCode, acronym, name, credit, degreeid, branchid, semester, batch } `}
             </Modal.Body>

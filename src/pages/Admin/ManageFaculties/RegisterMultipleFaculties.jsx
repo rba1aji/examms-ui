@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import axios from "axios";
 import { EXCEL_REGISTER_FACULTIES } from '../../../reducers/ApiEndPoints';
+import Cookies from 'js-cookie';
 
 function MyVerticallyCenteredModal(props) {
     const [file, setFile] = useState(null);
@@ -26,6 +27,7 @@ function MyVerticallyCenteredModal(props) {
             data: formData,
             headers: {
                 'Content-Type': 'multipart/form-data',
+                Authorization: "Bearer " + Cookies.get('authtoken')
             }
         })
             .then((response) => {
@@ -79,7 +81,9 @@ function MyVerticallyCenteredModal(props) {
                     </Form>
                 </div>
                 <br />
-                <a href='/public/exceltemplates/FacultyExcelRegister.xlsx'>faculty excel register template</a>
+                <a
+                    target='_blank'
+                    href='https://docs.google.com/spreadsheets/d/1Gkd2rPom2lZRY32p-hFFwoydDPdZe0yA/edit?usp=sharing&ouid=112743947420918199538&rtpof=true&sd=true'>faculty excel register template</a>
                 <br />
                 {`Row should be: { username, password, fullName, designation, department, phone, email } `}
             </Modal.Body>

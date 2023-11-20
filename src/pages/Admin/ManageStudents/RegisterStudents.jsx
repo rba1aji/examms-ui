@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { Form } from 'react-bootstrap';
 import axios from "axios";
 import { EXCEL_REGISTER_STUDENTS } from '../../../reducers/ApiEndPoints';
+import Cookies from 'js-cookie';
 
 function MyVerticallyCenteredModal(props) {
     const [file, setFile] = useState(null);
@@ -82,7 +83,9 @@ function MyVerticallyCenteredModal(props) {
                 </div>
                 <br />
                 <div className=''>
-                    <a href='/public/exceltemplates/StudentExcelRegister.xlsx'>student excel register template</a>
+                    <a
+                        target='_blank'
+                        href='https://docs.google.com/spreadsheets/d/1UJj3-l4c0wAo6Rdhg43l9N8MmzhhvUqz/edit?usp=sharing&ouid=112743947420918199538&rtpof=true&sd=true'>student excel register template</a>
                     <br />
                     {`Row should be: { registerNumber, dateOfBirth, fullName, departmentCode, section, batch, phone } `}
                 </div>
