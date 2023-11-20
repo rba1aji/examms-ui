@@ -42,7 +42,7 @@ export default function CourseTable() {
                             zIndex: 1
                         }}>
                             {
-                                ["Sno", "CourseID", "Name", "Credits", "Degree", 'Branch', 'Semester', "Batch"]
+                                ["Sno", "Course Code", "Name", "Credits", "Degree", 'Branch', 'Semester', "Batch"]
                                     .map((item, index) => {
                                         return <th
                                             key={index}

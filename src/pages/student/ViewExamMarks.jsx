@@ -132,7 +132,7 @@ export default function ViewExamMarks() {
                             {
                                 marks.map((itm, ind) => (
                                     <tr key={ind}>
-                                        <td>{itm.courseid}</td>
+                                        <td>{itm.course.code}</td>
                                         <td>{itm.attendance ? "Present" : "Absent"}</td>
                                         <td>{itm.mark}</td>
                                     </tr>
