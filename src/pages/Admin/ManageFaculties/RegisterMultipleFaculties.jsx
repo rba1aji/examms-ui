@@ -82,8 +82,10 @@ function MyVerticallyCenteredModal(props) {
                 </div>
                 <br />
                 <a
-                    target='_blank'
-                    href='https://docs.google.com/spreadsheets/d/1Gkd2rPom2lZRY32p-hFFwoydDPdZe0yA/edit?usp=sharing&ouid=112743947420918199538&rtpof=true&sd=true'>faculty excel register template</a>
+                    // target='_blank'
+                    href={'/exceltemplates/FacultyExcelRegister.xlsx?url'}
+                >
+                    faculty excel register template</a>
                 <br />
                 {`Row should be: { username, password, fullName, designation, department, phone, email } `}
             </Modal.Body>
