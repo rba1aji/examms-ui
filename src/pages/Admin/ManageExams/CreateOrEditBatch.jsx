@@ -5,6 +5,7 @@ import { Col, Form, Row } from 'react-bootstrap';
 import axios from 'axios';
 import { inputFormateDateTime } from '../../../reducers/Utils';
 import { ADD_UPDATE_EXAMBATCH, GET_ALL_FACULTIES } from '../../../reducers/ApiEndPoints';
+import Cookies from 'js-cookie';
 
 function MyVerticallyCenteredModal(props) {
     const { onHide, selectedCourse, selectedExam, type, prevBatch } = props;
