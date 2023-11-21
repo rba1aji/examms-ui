@@ -97,7 +97,7 @@ export default function Exam() {
                 <span className="pe-4">
                     <Button variant="info" className="ms-auto px-4 py-1"
                         as={Link}
-                        to={`/faculty/exam/${examBatchId}/print-1`}
+                        to={`/faculty/exam/${examBatchId}/print-attendance`}
                         target="_blank"
                     >
                         Print Attendance
@@ -106,7 +106,7 @@ export default function Exam() {
                 <span className="">
                     <Button variant="info" className=" ms-auto px-4 py-1"
                         as={Link}
-                        to={`/faculty/exam/${examBatchId}/print-2`}
+                        to={`/faculty/exam/${examBatchId}/print-marks`}
                         target="_blank"
                     >
                         Print Marks
