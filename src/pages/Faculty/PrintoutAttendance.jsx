@@ -20,15 +20,17 @@ export default function PrintoutAttendance() {
                 setExamBatch={setExamBatch}
                 setStudentMarks={setStudentMarks}
             />
-            <PDFViewer style={{
-                width: '100%',
-                height: '100vh'
-            }}>
-                <MyDocument
-                    examBatch={examBatch}
-                    studentMarks={studentMarks}
-                />
-            </PDFViewer>
+            {studentMarks.length &&
+                <PDFViewer style={{
+                    width: '100%',
+                    height: '100vh'
+                }}>
+                    <MyDocument
+                        examBatch={examBatch}
+                        studentMarks={studentMarks}
+                    />
+                </PDFViewer>
+            }
         </div>
     )
 }
