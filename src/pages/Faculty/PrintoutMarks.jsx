@@ -3,7 +3,7 @@ import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { PDFViewer } from '@react-pdf/renderer';
 import ExamData from './ExamData';
 import { useParams } from 'react-router-dom';
-import { attendanceConfig, numbersToWords, displayDDMMYYY, } from '../../reducers/Utils';
+import { attendanceConfig, numbersToWords, displayDDMMYYY, numToRoman, } from '../../reducers/Utils';
 
 export default function PrintoutMarks() {
     const [examBatch, setExamBatch] = useState({});
@@ -64,7 +64,7 @@ function MyDocument(props) {
                                 Programme & Semester :
                             </Text>
                             <Text style={{ ...styles.th, border: '0' }}>
-                                {studentDepartment?.degree?.code + " " + studentDepartment?.name + " Semester " + examBatch?.exam?.semester}
+                                {studentDepartment?.degree?.code + " " + studentDepartment?.name + " Semester " + numToRoman(examBatch?.exam?.semester)}
                             </Text>
                         </View>
                         <View style={{ ...styles.tr, border: '0', }}>

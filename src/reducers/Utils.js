@@ -29,6 +29,14 @@ export const attendanceConfig = {
     '-': { value: 'Nil', color: 'black' }
 };
 
+
+export const numToRoman = (num) => {
+    if (num) {
+        const roman = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
+        return roman[num];
+    }
+}
+
 export function formateDob(dob) {
     dob = new Date(dob);
     return ('0' + dob.getDate()).slice(-2) + "/" + ('0' + (dob.getMonth() + 1)).slice(-2) + "/" + dob.getFullYear();
@@ -83,9 +91,4 @@ export const numbersToWords = (n) => {
         return (n + "").split("")?.map((i) => marksInWords[i] + " ")
     }
     return '-';
-}
-
-export const numToRoman = (num) => {
-    const roman = ["", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"];
-    return roman[num];
 }
