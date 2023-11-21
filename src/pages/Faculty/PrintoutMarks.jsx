@@ -3,7 +3,7 @@ import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { PDFViewer } from '@react-pdf/renderer';
 import ExamData from './ExamData';
 import { useParams } from 'react-router-dom';
-import { attendanceConfig, numbersToWords, } from '../../reducers/Utils';
+import { attendanceConfig, numbersToWords, displayDDMMYYY, } from '../../reducers/Utils';
 
 export default function PrintoutMarks() {
     const [examBatch, setExamBatch] = useState({});
@@ -13,6 +13,7 @@ export default function PrintoutMarks() {
 
     return (
         <div className='pt-3 bg-dark'>
+
             <ExamData
                 examBatchId={examBatchId}
                 examBatch={examBatch}
@@ -38,46 +39,60 @@ export default function PrintoutMarks() {
 function MyDocument(props) {
     const { studentMarks, examBatch } = props;
 
+    let studentDepartment = studentMarks[0]?.student?.department;
+
     return (
         <>
             <Document title={(examBatch?.exam?.name + "_" + examBatch?.course?.code + "_" + examBatch?.name).replaceAll(" ", "_") + "_Marks"}>
                 <Page size="A4" style={styles.page}>
-
                     <View style={styles.table}>
-                        <Text style={{ ...styles.titleText, paddingBottom: '2.5px' }}>
+                        <Text style={{ ...styles.titleText, paddingBottom: '2.5px', fontSize: '10px' }}>
                             K.S.RANGASAMY COLLEGE OF TECHNOLOGY, TIRUCHENGODE - 637 215
                         </Text>
 
-                        <Text style={{ ...styles.titleText, paddingBottom: '15px', fontSize: 9 }}>
+                        <Text style={{ ...styles.titleText, paddingBottom: '3.5px', fontSize: '8px' }}>
                             (An Autonomous Institution Affiliated to Anna University, Chennai - 600 025)
                         </Text>
-
-                        <View style={{ ...styles.tr, border: '0', padding: '0 0px' }}>
-                            <Text style={{ ...styles.th, width: '50%', border: '0' }}>
-                                Course Code: {examBatch?.course?.code}
+                        <Text style={{ ...styles.titleText, paddingBottom: '3.5px', fontSize: '11px' }}>
+                            {examBatch?.exam?.name}
+                        </Text>
+                        <Text style={{ ...styles.titleText, paddingBottom: '5px', fontSize: '12px', fontWeight: 'bolder' }}>
+                            MARKS REPORT
+                        </Text>
+                        <View style={{ ...styles.tr, border: '0' }}>
+                            <Text style={{ ...styles.th, width: '30%', border: '0' }}>
+                                Programme & Semester :
                             </Text>
-                            <Text style={{ ...styles.th, width: '50%', border: '0', paddingLeft: '20px' }}>
-                                Batch: {examBatch?.exam?.batch}
+                            <Text style={{ ...styles.th, border: '0' }}>
+                                {studentDepartment?.degree?.code + " " + studentDepartment?.name + " Semester " + examBatch?.exam?.semester}
                             </Text>
                         </View>
-                        <View style={{ ...styles.tr, border: '0', padding: '0 0px', paddingBottom: '15px' }}>
-                            <Text style={{ ...styles.th, width: '50%', border: '0', }}>
-                                Course Title: {examBatch?.course?.name}
+                        <View style={{ ...styles.tr, border: '0', }}>
+                            <Text style={{ ...styles.th, width: '30%', border: '0', }}>
+                                Course Code & Title :
                             </Text>
-                            <Text style={{ ...styles.th, width: '50%', border: '0', paddingLeft: '20px' }}>
-                                Semester: {examBatch?.exam?.semester}
+                            <Text style={{ ...styles.th, border: '0', }}>
+                                {examBatch?.course?.code + " " + examBatch?.course?.name}
+                            </Text>
+                        </View>
+                        <View style={{ ...styles.tr, border: '0' }}>
+                            <Text style={{ ...styles.th, width: '30%', border: '0', }}>
+                                Date :
+                            </Text>
+                            <Text style={{ ...styles.th, border: '0' }}>
+                                {displayDDMMYYY(new Date(examBatch?.startTime))}
                             </Text>
                         </View>
 
                         {/*Table head */}
-                        <View style={styles.tr}>
+                        <View style={{ ...styles.tr, marginTop: '10px' }}>
                             <Text style={{ ...styles.th, width: '35%' }}>Sno</Text>
                             <Text style={{ ...styles.th, width: '110%' }}>Register number</Text>
-                            <Text style={{ ...styles.th, width: '220%' }}>Full name</Text>
+                            <Text style={{ ...styles.th, width: '220%' }}>Name of the Candidate</Text>
                             <Text style={{ ...styles.th, width: '100%' }}>Attendance</Text>
                             <Text style={{ ...styles.th, width: '65%', textAlign: '' }}>Marks in numbers</Text>
                             <Text style={{ ...styles.th, width: '140%' }}>Marks in words</Text>
-                            {/* <Text style={{ ...styles.th, width: '140%' }}>Student sign</Text> */}
+                            {/* <Text style={{ ...styles.th, width: '140%' }}>Signature of the Candidate</Text> */}
                         </View>
                         {/* body */}
                         {
@@ -101,16 +116,33 @@ function MyDocument(props) {
                                 )
                             })
                         }
+                        <View style={{ ...styles.tr }}>
+                            <Text style={{ ...styles.td, width: '110%', borderRight: '0', paddingLeft: '10%', paddingTop: '5px', paddingBottom: '5px' }}>
+                                Present: {studentMarks?.filter(i => i.attendance == 'P')?.length}
+                            </Text>
+                            <Text style={{ ...styles.td, width: '110%', paddingLeft: '5%', paddingBottom: '5px', paddingTop: '5px' }}>
+                                Absent: {studentMarks?.filter(i => i.attendance == 'A')?.length}
+                            </Text>
+                        </View>
 
-
-
-                        <Text style={{ ...styles.footerText, paddingTop: '20px' }}>
-                            Internal Examiner 1: {examBatch?.faculty?.fullName}
-                        </Text>
-                        <Text style={{ ...styles.footerText, }}>
-                            Internal Examiner 2:
-                        </Text>
-
+                        <View style={{ ...styles.tr }}>
+                            <Text style={{ ...styles.td, width: '80%' }}>Examiner</Text>
+                            <Text style={{ ...styles.td, width: '200%' }}>Examiner Name</Text>
+                            <Text style={{ ...styles.td, width: '160%' }}>Designation/College</Text>
+                            <Text style={{ ...styles.td, width: '120%' }}>Signature</Text>
+                        </View>
+                        <View style={styles.tr}>
+                            <Text style={{ ...styles.td, width: '80%', paddingTop: '5px', paddingBottom: '5px' }}>Examiner 1</Text>
+                            <Text style={{ ...styles.td, width: '200%', paddingTop: '5px', paddingBottom: '5px' }}>{examBatch?.faculty?.fullName}</Text>
+                            <Text style={{ ...styles.td, width: '160%', paddingTop: '5px', paddingBottom: '5px' }}>{examBatch?.faculty?.designation}</Text>
+                            <Text style={{ ...styles.td, width: '120%', paddingTop: '5px', paddingBottom: '5px' }}></Text>
+                        </View>
+                        <View style={styles.tr}>
+                            <Text style={{ ...styles.td, width: '80%', paddingTop: '5px', paddingBottom: '5px' }}>Examiner 2</Text>
+                            <Text style={{ ...styles.td, width: '200%', paddingTop: '5px', paddingBottom: '5px' }}></Text>
+                            <Text style={{ ...styles.td, width: '160%', paddingTop: '5px', paddingBottom: '5px' }}></Text>
+                            <Text style={{ ...styles.td, width: '120%', paddingTop: '5px', paddingBottom: '5px' }}></Text>
+                        </View>
                     </View>
                 </Page>
             </Document >

@@ -12,6 +12,16 @@ export function displayDDMMYYYHHMMSS(time) {
     }
 }
 
+export function displayDDMMYYY(time) {
+    if (time) {
+        const isoString = new Date(time)?.toISOString();
+        const isoDate = isoString.split('T')[0];
+        const [y, m, d] = isoDate.split('-');
+        const formattedDate = `${d}-${m}-${y}`;
+        return formattedDate;
+    }
+}
+
 export const attendanceConfig = {
     P: { value: 'Present', color: 'green' },
     A: { value: 'Absent', color: 'red' },

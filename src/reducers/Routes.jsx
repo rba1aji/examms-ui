@@ -47,12 +47,12 @@ export const facultyWorkspaceRoutes = [
         component: <Exam />
     },
     {
-        path: '/faculty/exam/:examBatchId/print-1',
+        path: '/faculty/exam/:examBatchId/print-attendance',
         title: 'Printout Attendance',
         component: <PrintoutAttendance />
     },
     {
-        path: '/faculty/exam/:examBatchId/print-2',
+        path: '/faculty/exam/:examBatchId/print-marks',
         title: 'Printout Marks',
         component: <PrintoutMarks />
     }
