@@ -53,22 +53,24 @@ export default function Exam() {
 
     useEffect(() => {  //update student marks
         const intervalId = setInterval(() => {
-            var data = studentMarks?.filter(i => !studentMarksCopy.includes(i));
-            if (data?.length && remTime != "0 : 0 : 0 : 0") {
-                axios({
-                    method: 'POST',
-                    url: ADD_UPDATE_MARKS_LIST + "/" + examBatch?.id,
-                    data: studentMarks,
-                    headers: { 'Authorization': 'Bearer ' + Cookies.get('authtoken') }
-                })
-                    .then(res => {
-                        console.log(res.data?.message)
-                        setStudentMarksCopy(studentMarks.slice())
+            if (remTime != "0 : 0 : 0 : 0" && !examBatch?.disableMarksEntry) {
+                var data = studentMarks?.filter(i => !studentMarksCopy.includes(i));
+                if (data?.length) {
+                    axios({
+                        method: 'POST',
+                        url: ADD_UPDATE_MARKS_LIST + "/" + examBatch?.id,
+                        data: studentMarks,
+                        headers: { 'Authorization': 'Bearer ' + Cookies.get('authtoken') }
                     })
-                    .catch(err => {
-                        window.location.reload()
-                        console.log(err.message)
-                    })
+                        .then(res => {
+                            console.log(res.data?.message)
+                            setStudentMarksCopy(studentMarks.slice())
+                        })
+                        .catch(err => {
+                            window.location.reload()
+                            console.log(err.message)
+                        })
+                }
             }
         }, 5 * 1000);
         return () => {
@@ -160,13 +162,13 @@ export default function Exam() {
                                 <span>Attendance</span>
                                 {
                                     examBatch?.disableAttendanceEntry &&
-                                    <span className="text-danger" ><br />Disbaled</span>
+                                    <span className="text-danger" ><br />Disabaled</span>
                                 }
                             </th>
                             <th className="text-center">Marks in numbers
                                 {
                                     examBatch?.disableMarksEntry &&
-                                    <span className="text-danger" ><br />Disbaled</span>
+                                    <span className="text-danger" ><br />Disabaled</span>
                                 }
                             </th>
                             <th className="text-center">Marks in words</th>
