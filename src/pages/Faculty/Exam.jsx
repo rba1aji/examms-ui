@@ -162,13 +162,13 @@ export default function Exam() {
                                 <span>Attendance</span>
                                 {
                                     examBatch?.disableAttendanceEntry &&
-                                    <span className="text-danger" ><br />Disabaled</span>
+                                    <span className="text-danger" ><br />Disabled</span>
                                 }
                             </th>
                             <th className="text-center">Marks in numbers
                                 {
                                     examBatch?.disableMarksEntry &&
-                                    <span className="text-danger" ><br />Disabaled</span>
+                                    <span className="text-danger" ><br />Disabled</span>
                                 }
                             </th>
                             <th className="text-center">Marks in words</th>
