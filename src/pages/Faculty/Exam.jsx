@@ -232,7 +232,7 @@ export default function Exam() {
                                             <Form.Control
                                                 disabled={
                                                     remTime === "0 : 0 : 0 : 0"
-                                                    || "A-O".includes(stMark?.attendance)
+                                                    || "A-OW".includes(stMark?.attendance)
                                                     || examBatch?.disableMarksEntry
 
                                                 }
