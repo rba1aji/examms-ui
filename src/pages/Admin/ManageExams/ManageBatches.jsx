@@ -26,7 +26,7 @@ function MyVerticallyCenteredModal(props) {
             }
         })
             .then((res) => {
-                console.log("exam examBatches fetched", res.data);
+                console.log(res?.data?.message);
                 setExamBatches(res.data?.data)
             })
     }, [selectedCourse, selectedExam, render])

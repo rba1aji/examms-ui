@@ -24,7 +24,7 @@ export const SAVE_UPDATE_COURSES = BASE_URL + "/registration/v1/save-update-cour
 export const ADD_UPDATE_EXAM = BASE_URL + "/exam/v1/add-update-exam";
 export const ADD_UPDATE_EXAMBATCH = BASE_URL + "/exam-batch/v1/add-update-exam-batch";
 
-export const ADD_UPDATE_MARKS_LIST = BASE_URL + "/marks/v1/add-update-marks-list";
+export const ADD_UPDATE_MARKS_LIST = BASE_URL + "/marks/v2/add-update-marks-list";
 
 export const GET_ACTIVE_EXAM_BATCHES = BASE_URL + "/faculty/v1/get-active-exam-batches";
 
@@ -33,3 +33,5 @@ export const CHANGE_PASSOWRD = BASE_URL + "/auth/v1/change-password";
 export const GET_STUDENT_PROFILE = BASE_URL + "/student/v1/get-profile";
 
 export const EXAM_MARKS_REPORT = BASE_URL + "/report/v1/exam-marks-report";
+
+export const SUBMIT_MARKS_ENTRY_BY_FACULTY = BASE_URL + "/exam-batch/v1/submit-marks-entry-by-faculty"

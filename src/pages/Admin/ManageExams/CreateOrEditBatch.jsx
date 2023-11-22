@@ -9,7 +9,7 @@ import Cookies from 'js-cookie';
 
 function MyVerticallyCenteredModal(props) {
     const { onHide, selectedCourse, selectedExam, type, prevBatch } = props;
-    const [faculties, setFaculties] = useState([])
+    const [faculties, setFaculties] = useState([]);
     let initialVal = {
         id: '',
         name: '',
@@ -30,21 +30,17 @@ function MyVerticallyCenteredModal(props) {
             endTime: inputFormateDateTime(prevBatch.endTime),
             facultyId: prevBatch.faculty.id,
             venue: prevBatch.venue,
-            courseId: selectedCourse?.id,
+            courseId: prevBatch?.course?.id,
             examId: selectedExam?.id,
+            disableMarksEntry: prevBatch.disableMarksEntry,
+            disableAttendanceEntry: prevBatch.disableAttendanceEntry
         }
     }
 
     const [newBatch, setNewBatch] = useState(initialVal);
 
-
     async function handleRegisterBatch(e) {
         e.preventDefault();
-        // setNewBatch(prev => ({
-        //     ...prev,
-        //     startTime: new Date(prev.startTime).toLocaleString(),
-        //     endTime: new Date(prev.endTime).toLocaleString()
-        // }))
         await axios({
             method: 'POST',
             url: ADD_UPDATE_EXAMBATCH,
@@ -54,16 +50,13 @@ function MyVerticallyCenteredModal(props) {
             }
         })
             .then(res => {
-                alert(res.data.message)
+                alert(res.data?.message)
                 onHide()
                 props.setRender(prev => prev + 1)
             })
             .catch(err =>
-                alert(err.response.data.message)
+                alert(err?.response?.data.message)
             )
-
-        console.log('update batch', newBatch)
-
     }
 
     useEffect(() => {
@@ -107,8 +100,24 @@ function MyVerticallyCenteredModal(props) {
                         border: '1px solid #adb5bd',
                     }}>
 
-                    <div className='text-center pb-4 '>
+                    <div className='text-center pb-3 '>
                         <Button variant='info' type='submit'>{type === "create" ? 'Create' : 'Update'} Batch</Button>
+                    </div>
+                    <div className='pb-3 ' >
+                        <div>
+                            <Form.Check
+                                label={"Disable Marks Entry"}
+                                type={'switch'}
+                                style={{ color: 'red' }}
+                                checked={newBatch?.disableMarksEntry}
+                                onChange={e => {
+                                    setNewBatch(prev => ({
+                                        ...prev,
+                                        disableMarksEntry: e.target.checked
+                                    }));
+                                }}
+                            />
+                        </div>
                     </div>
 
                     <Row>
@@ -234,15 +243,14 @@ function MyVerticallyCenteredModal(props) {
 
 export default function CreateOrEditBatch(props) {
     const [modalShow, setModalShow] = useState(false);
-    const { selectedCourse, type } = props;
 
 
-    if (!selectedCourse?.id) return <></>
+    if (!props?.selectedCourse?.id) return <></>
     return (
         <>
             <Button variant="info" onClick={() => setModalShow(true)}
-                className={type === 'edit' ? 'py-0' : 'py-0'}>
-                {type === "create" ? 'Create new' : 'Edit'}
+                className={props?.type === 'edit' ? 'py-0' : 'py-0'}>
+                {props?.type === "create" ? 'Create new' : 'Edit'}
             </Button>
 
             <MyVerticallyCenteredModal

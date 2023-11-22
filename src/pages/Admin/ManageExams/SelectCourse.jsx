@@ -30,7 +30,7 @@ export default function SelectCourse(props) {
             })
                 .then(res => {
                     setCourses(res.data.data)
-                    console.log("courses are fetched", res.data)
+                    console.log(res.data?.message)
                 })
                 .catch(err => alert(err.response.data.message))
         }

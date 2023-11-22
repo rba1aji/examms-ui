@@ -5,7 +5,7 @@ import { Link, useParams } from "react-router-dom"
 import Timer from "../../components/Timer";
 import { numbersToWords, attendanceConfig } from "../../reducers/Utils";
 import Cookies from "js-cookie";
-import { ADD_UPDATE_MARKS_LIST, GET_ALL_MARKS_FOR_EXAM_BATCH, GET_EXAM_BATCH } from "../../reducers/ApiEndPoints";
+import { ADD_UPDATE_MARKS_LIST, GET_ALL_MARKS_FOR_EXAM_BATCH, GET_EXAM_BATCH, SUBMIT_MARKS_ENTRY_BY_FACULTY } from "../../reducers/ApiEndPoints";
 import ExamData from "./ExamData";
 
 export default function Exam() {
@@ -27,7 +27,7 @@ export default function Exam() {
         })
             .then(res => {
                 setExamBatch(res.data?.data)
-                console.log(res.data)
+                console.log(res.data?.message)
             })
             .catch(err => console.log(err.response.data.message))
     }, [examBatchId])
@@ -44,7 +44,8 @@ export default function Exam() {
             })
                 .then(res => {
                     setStudentMarks(res.data?.data)
-                    console.log(res.data)
+                    setStudentMarksCopy(res?.data?.data)
+                    console.log(res.data?.message)
                 })
                 .catch(err => console.log(err.response.data.message))
         }
@@ -56,7 +57,7 @@ export default function Exam() {
             if (data?.length) {
                 axios({
                     method: 'POST',
-                    url: ADD_UPDATE_MARKS_LIST,
+                    url: ADD_UPDATE_MARKS_LIST + "/" + examBatch?.id,
                     data: studentMarks,
                     headers: { 'Authorization': 'Bearer ' + Cookies.get('authtoken') }
                 })
@@ -64,13 +65,36 @@ export default function Exam() {
                         console.log(res.data?.message)
                         setStudentMarksCopy(studentMarks.slice())
                     })
-                    .catch(err => console.log(err.message))
+                    .catch(err => {
+                        window.location.reload()
+                        console.log(err.message)
+                    })
             }
         }, 5 * 1000);
         return () => {
             clearInterval(intervalId);
         };
     }, [studentMarks, studentMarksCopy]);
+
+    function handleSubmitMarksEntry() {
+        axios({
+            method: "POST",
+            url: SUBMIT_MARKS_ENTRY_BY_FACULTY,
+            params: {
+                examBatchId: examBatch?.id
+            },
+            headers: {
+                Authorization: 'Bearer ' + Cookies.get('authtoken')
+            }
+        }).then(res => {
+            setExamBatch(res?.data?.data);
+            console.log(res?.data?.message);
+            alert('Submitted Marks Entry Successfully');
+        }).catch(err => {
+            alert(err?.response?.data?.message)
+            console.log(err);
+        })
+    }
 
     return (
         <div style={{
@@ -108,6 +132,12 @@ export default function Exam() {
                         as={Link}
                         to={`/faculty/exam/${examBatchId}/print-marks`}
                         target="_blank"
+                        onClick={(e) => {
+                            if (!examBatch?.disableMarksEntry) {
+                                e.preventDefault();
+                                alert("Submit the marks entry to take print!");
+                            }
+                        }}
                     >
                         Print Marks
                     </Button>
@@ -137,7 +167,9 @@ export default function Exam() {
                                     <td>{stMark.student.fullName}</td>
                                     <td className="text-center attendance">
                                         <Form.Select
-                                            disabled={remTime === "0 : 0 : 0 : 0"}
+                                            disabled={remTime === "0 : 0 : 0 : 0"
+                                                || examBatch?.disableMarksEntry
+                                            }
                                             size="sm"
                                             style={{ width: '60%', display: 'block', margin: 'auto', fontWeight: '600' }}
                                             onChange={e => {
@@ -184,8 +216,10 @@ export default function Exam() {
                                         <Form.Group className="px-5">
                                             <Form.Control
                                                 disabled={
-                                                    remTime === "0 : 0 : 0 : 0" ||
-                                                    "A-O".includes(stMark?.attendance)
+                                                    remTime === "0 : 0 : 0 : 0"
+                                                    || "A-O".includes(stMark?.attendance)
+                                                    || examBatch?.disableMarksEntry
+
                                                 }
                                                 type={stMark?.attendance != 'P' ? 'text' : 'number'}
                                                 className="py-1 text-center "
@@ -219,6 +253,14 @@ export default function Exam() {
                 </Table>
             </div>
             <br />
+            <div className="text-center">
+                <Button variant="danger"
+                    onClick={handleSubmitMarksEntry}
+                    disabled={examBatch?.disableMarksEntry}
+                >
+                    {examBatch?.disableMarksEntry ? "Marks Entry Disabled" : " Submit Marks Entry"}
+                </Button>
+            </div>
             <br />
         </div >
     )
