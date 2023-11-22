@@ -144,6 +144,9 @@ export default function Exam() {
                 </span>
             </div>
 
+            <p className="mb-2 text-warning text-end">
+                Auto saving every 5 seconds
+            </p>
             <div style={{
                 // margin: '0 2.5vw'
             }}>

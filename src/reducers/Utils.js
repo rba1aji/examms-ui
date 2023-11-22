@@ -26,6 +26,7 @@ export const attendanceConfig = {
     P: { value: 'Present', color: 'green' },
     A: { value: 'Absent', color: 'red' },
     O: { value: 'On Duty', color: 'blue' },
+    W: { value: 'Withdraw', color: 'darkblue' },
     '-': { value: 'Nil', color: 'black' }
 };
 
