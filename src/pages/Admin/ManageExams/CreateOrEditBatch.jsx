@@ -106,8 +106,22 @@ function MyVerticallyCenteredModal(props) {
                     <div className='pb-3 ' >
                         <div>
                             <Form.Check
+                                label={"Disable Attendance Entry"}
+                                type={'switch'}
+                                inline
+                                style={{ color: 'red' }}
+                                checked={newBatch?.disableMarksEntry || newBatch?.disableAttendanceEntry}
+                                onChange={e => {
+                                    setNewBatch(prev => ({
+                                        ...prev,
+                                        disableAttendanceEntry: e.target.checked
+                                    }));
+                                }}
+                            />
+                            <Form.Check
                                 label={"Disable Marks Entry"}
                                 type={'switch'}
+                                inline
                                 style={{ color: 'red' }}
                                 checked={newBatch?.disableMarksEntry}
                                 onChange={e => {

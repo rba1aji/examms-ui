@@ -153,8 +153,19 @@ export default function Exam() {
                             <th>Sno</th>
                             <th>Register no</th>
                             <th>Name</th>
-                            <th className="text-center">Attendance</th>
-                            <th className="text-center">Marks in numbers</th>
+                            <th className="text-center">
+                                <span>Attendance</span>
+                                {
+                                    examBatch?.disableAttendanceEntry &&
+                                    <span className="text-danger" ><br />Disbaled</span>
+                                }
+                            </th>
+                            <th className="text-center">Marks in numbers
+                                {
+                                    examBatch?.disableMarksEntry &&
+                                    <span className="text-danger" ><br />Disbaled</span>
+                                }
+                            </th>
                             <th className="text-center">Marks in words</th>
                         </tr>
                     </thead>
@@ -168,6 +179,7 @@ export default function Exam() {
                                     <td className="text-center attendance">
                                         <Form.Select
                                             disabled={remTime === "0 : 0 : 0 : 0"
+                                                || examBatch?.disableAttendanceEntry
                                                 || examBatch?.disableMarksEntry
                                             }
                                             size="sm"
