@@ -54,7 +54,7 @@ export default function Exam() {
     useEffect(() => {  //update student marks
         const intervalId = setInterval(() => {
             var data = studentMarks?.filter(i => !studentMarksCopy.includes(i));
-            if (data?.length) {
+            if (data?.length && remTime != "0 : 0 : 0 : 0") {
                 axios({
                     method: 'POST',
                     url: ADD_UPDATE_MARKS_LIST + "/" + examBatch?.id,
