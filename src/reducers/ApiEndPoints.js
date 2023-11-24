@@ -1,6 +1,7 @@
 // export const serverurl = process.env.SPRINGBOOT_SERVER_URL;
-export const BASE_URL = "https://examms-springboot.onrender.com/api";
+// export const BASE_URL = "https://examms-springboot.onrender.com/api";
 // export const BASE_URL = "http://localhost:7001/api";
+export const BASE_URL = "http://10.5.9.5:7001/api";
 
 //login
 export const STUDENT_LOGIN = BASE_URL + "/auth/v1/student-login"
