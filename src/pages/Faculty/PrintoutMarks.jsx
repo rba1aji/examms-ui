@@ -49,7 +49,7 @@ function MyDocument(props) {
                 <Page size="A4" style={styles.page}>
                     <View style={styles.table}>
                         <Text style={{ ...styles.titleText, paddingBottom: '2.5px', fontSize: '10px' }}>
-                            K.S.RANGASAMY COLLEGE OF TECHNOLOGY, TIRUCHENGODE - 637 215
+                            DEMO COLLEGE OF TECHNOLOGY, TIRUCHENGODE - 637 215
                         </Text>
 
                         <Text style={{ ...styles.titleText, paddingBottom: '3.5px', fontSize: '8px' }}>
