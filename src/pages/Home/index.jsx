@@ -17,8 +17,8 @@ export default function Home() {
                 <div>
                     <b> Demo Faculty Login:</b>
                     <br />
-                    username: balaji<br />
-                    password: balaji<br />
+                    username: faculty<br />
+                    password: faculty<br />
                 </div>
                 <div>
                     <b>Demo Student Login:</b>
