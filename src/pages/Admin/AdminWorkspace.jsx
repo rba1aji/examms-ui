@@ -7,10 +7,11 @@ import ManageCourses from './ManageCourses';
 import ManageExams from './ManageExams';
 import ChangePassword from '../../components/ChangePassword';
 import Reports from './Reports';
+import ManageEvaluation from './ManageEvaluation';
 
 export default function AdminWorkspace() {
     const components = [
-        <ManageStudents />, <ManageFaculties />, <ManageCourses />, <ManageExams />, <Reports />, <ChangePassword />
+        <ManageStudents />, <ManageFaculties />, <ManageCourses />, <ManageExams />, <ManageEvaluation />, <Reports />, <ChangePassword />,
     ];
     const [key, setKey] = useState(
         window.sessionStorage.getItem('adminWorkspacePageKey') || 0
@@ -35,7 +36,7 @@ export default function AdminWorkspace() {
                             window.sessionStorage.setItem('adminWorkspacePageKey', ekey);
                         }}>
                         {
-                            ['Manage Students', 'Manage Faculties', 'Manage Courses', 'Manage Exams', 'Reports', 'Change Password']
+                            ['Manage Students', 'Manage Faculties', 'Manage Courses', 'Manage Exams', 'Manage Evaluation', 'Reports', 'Change Password']
                                 .map((item, index) => {
                                     return (
                                         <Nav.Link
