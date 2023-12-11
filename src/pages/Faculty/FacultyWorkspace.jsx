@@ -16,7 +16,7 @@ export function FacultyWorkspace() {
                 <td style={{
                     width: '15%',
                     height: '95vh',
-                    backgroundColor: 'azure'
+                    backgroundColor: '#F3F8FF'
                 }}
                     className='align-top pt-5 px-3 border-end'
                 >

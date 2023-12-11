@@ -27,7 +27,7 @@ export default function StudentProfile() {
             margin: '0 15vw'
         }}>
             <Table bordered className="mt-5 border-dark" style={{
-                backgroundColor: 'azure',
+                backgroundColor: '#F3F8FF',
                 tableLayout: 'fixed'
             }}
             >
