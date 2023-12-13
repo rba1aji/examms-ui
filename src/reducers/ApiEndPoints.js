@@ -35,3 +35,6 @@ export const GET_STUDENT_PROFILE = BASE_URL + "/student/v1/get-profile";
 export const EXAM_MARKS_REPORT = BASE_URL + "/report/v1/exam-marks-report";
 
 export const SUBMIT_MARKS_ENTRY_BY_FACULTY = BASE_URL + "/exam-batch/v1/submit-marks-entry-by-faculty"
+
+export const EVALUATION_CREATE = BASE_URL + "/evaluation/v1/create-evaluation-for-course"
+export const EVALUATION_GET_ALL = BASE_URL + "/evaluation/v1/get-all-evaluation"
