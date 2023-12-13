@@ -38,3 +38,5 @@ export const SUBMIT_MARKS_ENTRY_BY_FACULTY = BASE_URL + "/exam-batch/v1/submit-m
 
 export const EVALUATION_CREATE = BASE_URL + "/evaluation/v1/create-evaluation-for-course"
 export const EVALUATION_GET_ALL = BASE_URL + "/evaluation/v1/get-all-evaluation"
+
+export const EVALUATION_BUNDLES_GET_ALL_FOR_EVALUATIONID = BASE_URL + "/evaluation-bundle/v1/get-all-evaluation-bundle-for-evaluation";

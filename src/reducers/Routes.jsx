@@ -8,6 +8,7 @@ import StudentLogin from "../pages/student/StudentLogin"
 import StudentWorkspace from "../pages/student/StudentWorkspace";
 import PrintoutAttendance from '../pages/Faculty/PrintoutAttendance';
 import PrintoutMarks from "../pages/Faculty/PrintoutMarks";
+import EvaluationPage from "../pages/Faculty/Evaluations/EvaluationPage";
 
 export const loginRoutes = [
     {
@@ -55,6 +56,11 @@ export const facultyWorkspaceRoutes = [
         path: '/faculty/exam/:examBatchId/print-marks',
         title: 'Printout Marks',
         component: <PrintoutMarks />
+    },
+    {
+        path: '/faculty/evaluation/:evaluationId',
+        title: 'Evaluation',
+        component: <EvaluationPage />
     }
 ];
 
