@@ -1,6 +1,7 @@
+import { SPRINGBOOT_SERVER_URL } from "./ServerUrl";
+
 // export const serverurl = process.env.SPRINGBOOT_SERVER_URL;
-export const BASE_URL = "https://demo-examms-service.onrender.com/api";
-// export const BASE_URL = "http://localhost:7001/api";
+export const BASE_URL = SPRINGBOOT_SERVER_URL;
 
 //login
 export const STUDENT_LOGIN = BASE_URL + "/auth/v1/student-login"
