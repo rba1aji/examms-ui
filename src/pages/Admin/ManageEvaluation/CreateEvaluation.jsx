@@ -19,6 +19,7 @@ function MyVerticallyCenteredModal(props) {
     function handleCreateEvaluation(e) {
         e.preventDefault()
         onHide();
+        alert("Creating Evaluation...")
         axios({
             method: 'POST',
             url: EVALUATION_CREATE,
