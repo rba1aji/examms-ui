@@ -34,15 +34,15 @@ export default function ManageEvaluation() {
             <div className="d-flex flex-column" style={{ gap: '30px', width: '40%' }}>
                 <InputGroup>
                     <SelectExam setSelectedExam={setSelectedExam} />
-                    <Form.Control disabled value={selectedExam?.name} className="bg-white" />
+                    <Form.Control readOnly value={selectedExam?.name} />
                 </InputGroup>
                 <InputGroup>
                     <SelectDepartment selectedExam={selectedExam} setSelectedDepartment={setSelectedDepartment} showAnyway={true} />
-                    <Form.Control disabled value={(selectedDepartment?.code ?? '') + " " + (selectedDepartment?.name ?? '')} className="bg-white" />
+                    <Form.Control readOnly value={(selectedDepartment?.code ?? '') + " " + (selectedDepartment?.name ?? '')} />
                 </InputGroup>
                 <InputGroup >
                     <SelectCourse selectedDepartment={selectedDepartment} setSelectedCourse={setSelectedCourse} showAnyway={true} />
-                    <Form.Control disabled value={(selectedCourse?.code ?? '') + ' ' + (selectedCourse?.name ?? '')} className="bg-white" />
+                    <Form.Control readOnly value={(selectedCourse?.code ?? '') + ' ' + (selectedCourse?.name ?? '')} />
                 </InputGroup>
             </div>
             <div className="d-flex flex-column" style={{ gap: '30px' }}>

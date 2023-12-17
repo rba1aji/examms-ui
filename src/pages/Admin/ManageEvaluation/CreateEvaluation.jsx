@@ -1,13 +1,11 @@
 import Modal from 'react-bootstrap/Modal';
-import React, { useEffect, useState } from 'react';
-import SelectExam from "../ManageExams/SelectExam";
-import { Button, FloatingLabel, Form, FormControl, InputGroup } from "react-bootstrap";
-import SelectCourse from "../ManageExams/SelectCourse";
-import SelectDepartment from "../ManageExams/SelectDepartment";
+import React, { useState } from 'react';
+import { Button, Form, FormControl, InputGroup } from "react-bootstrap";
 import SelectFacultyV2 from './SelectFacultyV2';
 import axios from 'axios';
 import { EVALUATION_CREATE } from '../../../reducers/ApiEndPoints';
 import Cookies from 'js-cookie';
+import SelectConfigurationV2 from '../ManageConfigurations/SelectConfigurationV2';
 
 function MyVerticallyCenteredModal(props) {
     const { onHide, selectedExam, selectedCourse } = props;
@@ -15,6 +13,7 @@ function MyVerticallyCenteredModal(props) {
     const [startPaperNumber, setStartPaperNumber] = useState();
     const [endPaperNumber, setEndPaperNumber] = useState()
     const [description, setDescription] = useState('')
+    const [selectedConfiguration, setSelectedConfiguration] = useState()
 
     function handleCreateEvaluation(e) {
         e.preventDefault()
@@ -29,7 +28,7 @@ function MyVerticallyCenteredModal(props) {
                 facultyId: selectedFaculty.id,
                 startPaperNumber: startPaperNumber,
                 endPaperNumber: endPaperNumber,
-                configuration: "{}"
+                questionPaperConfigId: selectedConfiguration.id,
             },
             headers: {
                 Authorization: "Bearer " + Cookies.get('authtoken')
@@ -66,17 +65,20 @@ function MyVerticallyCenteredModal(props) {
                             <InputGroup.Text className='bg-info'>Description</InputGroup.Text>
                             <FormControl type='text' onChange={e => setDescription(e.target.value)} value={description} />
                         </InputGroup>
-                        <SelectFacultyV2 selectedFaculty={selectedFaculty} setSelectedFaculty={setSelectedFaculty} />
+                        <SelectFacultyV2 selectedFaculty={selectedFaculty} setSelectedFaculty={setSelectedFaculty} required />
                     </div>
                     <div className="d-flex flex-row" style={{ gap: '30px', width: '100%' }}>
                         <InputGroup >
                             <InputGroup.Text className='bg-info'>Start Paper Number</InputGroup.Text>
-                            <FormControl type='number' onChange={e => setStartPaperNumber(e.target.value)} value={startPaperNumber} />
+                            <FormControl type='number' onChange={e => setStartPaperNumber(e.target.value)} value={startPaperNumber} required />
                         </InputGroup>
                         <InputGroup >
                             <InputGroup.Text className='bg-info'>End Paper Number</InputGroup.Text>
-                            <FormControl type='number' onChange={e => setEndPaperNumber(e.target.value)} value={endPaperNumber} />
+                            <FormControl type='number' onChange={e => setEndPaperNumber(e.target.value)} value={endPaperNumber} required />
                         </InputGroup>
+                    </div>
+                    <div className="d-flex flex-row" style={{ gap: '30px', width: '50%' }}>
+                        <SelectConfigurationV2 selectedConfiguration={selectedConfiguration} setSelectedConfiguration={setSelectedConfiguration} />
                     </div>
                     <div className='mx-auto d-block pt-3'>
                         <Button variant='info' className='px-5' type='submit'>Create Evaluation</Button>

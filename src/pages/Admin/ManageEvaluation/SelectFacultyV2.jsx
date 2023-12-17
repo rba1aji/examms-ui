@@ -5,7 +5,7 @@ import { GET_ALL_FACULTIES } from "../../../reducers/ApiEndPoints";
 import Cookies from "js-cookie";
 
 export default function SelectFacultyV2(props) {
-    const { selectedFaculty, setSelectedFaculty } = props;
+    const { selectedFaculty, setSelectedFaculty, required } = props;
     const [faculties, setFaculties] = useState([])
 
     useEffect(() => {
@@ -23,7 +23,8 @@ export default function SelectFacultyV2(props) {
     return <InputGroup>
         <Dropdown className="d-inline" autoClose="inside" onSelect={(facultyId) => {
             setSelectedFaculty(faculties.find(i => i.id == facultyId))
-        }}>
+        }}
+        >
             <Dropdown.Toggle id="dropdown-autoclose-inside" style={{
                 wordWrap: 'break-word'
             }}
@@ -32,7 +33,7 @@ export default function SelectFacultyV2(props) {
                 Select Faculty
             </Dropdown.Toggle>
 
-            <Dropdown.Menu >
+            <Dropdown.Menu  >
                 {
                     faculties?.map((faculty, ind) => {
                         return (
@@ -47,7 +48,7 @@ export default function SelectFacultyV2(props) {
                 }
             </Dropdown.Menu>
         </Dropdown>
-        <Form.Control disabled value={selectedFaculty?.id ? selectedFaculty?.fullName + " (" + selectedFaculty?.username + ')' : ''}
+        <Form.Control readOnly value={selectedFaculty?.id ? selectedFaculty?.fullName + " (" + selectedFaculty?.username + ')' : ''}
             className="bg-white" />
     </InputGroup>
 }

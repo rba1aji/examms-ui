@@ -37,20 +37,21 @@ export default function EvaluationPage() {
     return <>
         <br />
         <div className="d-flex flex-row p-3">
-            <div className="d-flex flex-column px-2" style={{ width: '25%', height: '100%', overflowY: 'scroll' }}>
+            <div className="d-flex flex-column px-2" style={{ width: '25%', height: '90vh', overflowY: 'scroll' }}>
                 <p className="mb-3">Total Bundles : {evaluationBundles.length}</p>
                 {
                     [...evaluationBundles].map((bundle, idx) =>
                         <Card className='mb-4' style={{
                             backgroundColor: '#F3F8FF',
+                            fontSize: '12px'
                         }}
                             key={idx}
                         >
                             <Card.Body className="p-3 d-flex felx-row">
                                 <div className="d-flex flex-column" style={{ gap: '15px' }}>
-                                    <Card.Subtitle >Bundle: {idx + 1}</Card.Subtitle>
-                                    <Card.Subtitle >Papers Number: {bundle.evaluationPaperList[0].number + ' to ' + bundle.evaluationPaperList[bundle.evaluationPaperList?.length - 1].number}</Card.Subtitle>
-                                    {bundle.description && <Card.Subtitle>Description: {bundle.description}</Card.Subtitle>}
+                                    <Card.Subtitle style={{ fontSize: '14px' }}>Bundle: {idx + 1}</Card.Subtitle>
+                                    <Card.Subtitle style={{ fontSize: '14px' }}>Papers Number: {bundle.evaluationPaperList[0].number + ' to ' + bundle.evaluationPaperList[bundle.evaluationPaperList?.length - 1].number}</Card.Subtitle>
+                                    {bundle.description && <Card.Subtitle style={{ fontSize: '14px' }}>Description: {bundle.description}</Card.Subtitle>}
                                 </div>
                                 <div className="d-block ms-auto my-auto">
                                     <Button className=""
@@ -59,8 +60,7 @@ export default function EvaluationPage() {
                                         onClick={() => {
                                             setSelectedBundle(bundle)
                                         }}
-                                        style={{
-                                        }}
+                                        style={{ fontSize: '12px' }}
                                     >{bundle?.disableEntry ? "Disabled" : 'Evaluate >'}</Button>
                                 </div>
                             </Card.Body>

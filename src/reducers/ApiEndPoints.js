@@ -41,3 +41,6 @@ export const EVALUATION_CREATE = BASE_URL + "/evaluation/v1/create-evaluation-fo
 export const EVALUATION_GET_ALL = BASE_URL + "/evaluation/v1/get-all-evaluation"
 
 export const EVALUATION_BUNDLES_GET_ALL_FOR_EVALUATIONID = BASE_URL + "/evaluation-bundle/v1/get-all-evaluation-bundle-for-evaluation";
+
+export const CONFIGURATIONS_GET_ALL = BASE_URL + "/configuration/v1/get-all-configuration"
+export const CONFIGURATIONS_ADD_UPDATE = BASE_URL + "/configuration/v1/add-update-configuration"
