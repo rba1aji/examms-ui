@@ -1,4 +1,4 @@
-export const APP_LOGO = 'https://ksrct.ac.in/wp-content/uploads/2020/06/Brand_logo.png';
+export const APP_LOGO = 'https://cdn-icons-png.flaticon.com/512/5511/5511365.png';
 
 export function displayDDMMYYYHHMMSS(time) {
     if (time) {

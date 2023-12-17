@@ -13,7 +13,9 @@ export default function MenuBar() {
       <Navbar collapseOnSelect bg="info" expand="lg" fixed="top" className=''>
         <Container className='p-0'>
           <img src={APP_LOGO} alt='ksr'
-            width='42.5' height='37.5' />
+            width='42.5' height='37.5'
+            style={{ borderRadius: '15px' }}
+          />
           <div
             style={{ fontWeight: 'bold' }}
             className="h1 mb-0 ps-3 me-auto ms-2"
@@ -27,7 +29,7 @@ export default function MenuBar() {
                 paddingBottom: '3px'
               }}
               >
-                K.S.Rangasamy College of Technology
+                Demo College of Technology
               </div>
               <div style={{
                 fontSize: 16.5,
