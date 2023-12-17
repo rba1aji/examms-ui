@@ -78,7 +78,7 @@ function MyVerticallyCenteredModal(props) {
                         </InputGroup>
                     </div>
                     <div className="d-flex flex-row" style={{ gap: '30px', width: '50%' }}>
-                        <SelectConfigurationV2 selectedConfiguration={selectedConfiguration} setSelectedConfiguration={setSelectedConfiguration} />
+                        <SelectConfigurationV2 selectedConfiguration={selectedConfiguration} setSelectedConfiguration={setSelectedConfiguration} label="Select QuestionPaper" />
                     </div>
                     <div className='mx-auto d-block pt-3'>
                         <Button variant='info' className='px-5' type='submit'>Create Evaluation</Button>

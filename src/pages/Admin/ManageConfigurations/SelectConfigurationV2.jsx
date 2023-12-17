@@ -6,7 +6,7 @@ import Cookies from "js-cookie";
 
 export default function SelectConfigurationV2(props) {
     const [availableConfigs, setAvailableConfigs] = useState([])
-    const { setSelectedConfiguration, selectedConfiguration } = props;
+    const { setSelectedConfiguration, selectedConfiguration, label } = props;
 
     useEffect(() => {
         axios({
@@ -27,7 +27,7 @@ export default function SelectConfigurationV2(props) {
             }}
                 variant='info'
             >
-                Select Configuration
+                {label ?? 'Select Configuration'}
             </Dropdown.Toggle>
 
             <Dropdown.Menu >
