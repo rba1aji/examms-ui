@@ -36,7 +36,7 @@ export default function AllocatedExams() {
                 return (new Date(a.starttime) - new Date(b.starttime))
             })?.map((eb, ind) => {
                 return <Card className='bg- mb-4' style={{
-                    backgroundColor: 'azure',
+                    backgroundColor: '#F3F8FF',
                     margin: '0 22vw',
                 }}
                     key={ind}

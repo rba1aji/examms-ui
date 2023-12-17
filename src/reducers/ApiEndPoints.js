@@ -1,6 +1,7 @@
+import { SPRINGBOOT_SERVER_URL } from "./ServerUrl";
+
 // export const serverurl = process.env.SPRINGBOOT_SERVER_URL;
-export const BASE_URL = "https://demo-examms-service.onrender.com/api";
-// export const BASE_URL = "http://localhost:7001/api";
+export const BASE_URL = SPRINGBOOT_SERVER_URL;
 
 //login
 export const STUDENT_LOGIN = BASE_URL + "/auth/v1/student-login"
@@ -23,15 +24,18 @@ export const EXCEL_REGISTER_COURSES = BASE_URL + "/registration/v1/excel-registe
 export const SAVE_UPDATE_COURSES = BASE_URL + "/registration/v1/save-update-course";
 export const ADD_UPDATE_EXAM = BASE_URL + "/exam/v1/add-update-exam";
 export const ADD_UPDATE_EXAMBATCH = BASE_URL + "/exam-batch/v1/add-update-exam-batch";
-
 export const ADD_UPDATE_MARKS_LIST = BASE_URL + "/marks/v2/add-update-marks-list";
-
+export const SUBMIT_MARKS_ENTRY_BY_FACULTY = BASE_URL + "/exam-batch/v1/submit-marks-entry-by-faculty"
 export const GET_ACTIVE_EXAM_BATCHES = BASE_URL + "/faculty/v1/get-active-exam-batches";
 
 export const CHANGE_PASSOWRD = BASE_URL + "/auth/v1/change-password";
-
 export const GET_STUDENT_PROFILE = BASE_URL + "/student/v1/get-profile";
-
 export const EXAM_MARKS_REPORT = BASE_URL + "/report/v1/exam-marks-report";
 
-export const SUBMIT_MARKS_ENTRY_BY_FACULTY = BASE_URL + "/exam-batch/v1/submit-marks-entry-by-faculty"
+export const EVALUATION_CREATE = BASE_URL + "/evaluation/v1/create-evaluation-for-course"
+export const EVALUATION_GET_ALL = BASE_URL + "/evaluation/v1/get-all-evaluation"
+export const EVALUATION_BUNDLES_GET_ALL_FOR_EVALUATIONID = BASE_URL + "/evaluation-bundle/v1/get-all-evaluation-bundle-for-evaluation";
+
+export const EVALUATION_PAPER_SUBMIT_MARKS = (evaluationId, paperId) => BASE_URL + `/evaluation-paper/v1/submit-evaluation-paper-marks/${evaluationId}/${paperId}`
+export const CONFIGURATIONS_GET_ALL = BASE_URL + "/configuration/v1/get-all-configuration"
+export const CONFIGURATIONS_ADD_UPDATE = BASE_URL + "/configuration/v1/add-update-configuration"

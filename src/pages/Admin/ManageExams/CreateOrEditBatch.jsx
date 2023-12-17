@@ -230,7 +230,7 @@ function MyVerticallyCenteredModal(props) {
                                                     value={f.id}
                                                     id={f.id}
                                                 >
-                                                    {f.fullName}
+                                                    {f.fullName + ' (' + f.username + ')'}
                                                 </option>
                                             )
                                         })
