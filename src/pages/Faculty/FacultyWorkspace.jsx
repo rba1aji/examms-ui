@@ -3,9 +3,10 @@ import { Button } from 'react-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import ChangePassword from '../../components/ChangePassword';
 import AllocatedExams from './AllocatedExams';
+import Evaluations from './Evaluations';
 
 export function FacultyWorkspace() {
-    const components = [<AllocatedExams />, <ChangePassword />];
+    const components = [<AllocatedExams />, <Evaluations />, <ChangePassword />];
     const [key, setKey] = useState(0);
     return (
         <table style={{
@@ -16,7 +17,7 @@ export function FacultyWorkspace() {
                 <td style={{
                     width: '15%',
                     height: '95vh',
-                    backgroundColor: 'azure'
+                    backgroundColor: '#F3F8FF'
                 }}
                     className='align-top pt-5 px-3 border-end'
                 >
@@ -25,7 +26,7 @@ export function FacultyWorkspace() {
                             setKey(ekey);
                         }}>
                         {
-                            ['Exams', 'Change Password']
+                            ['Exams', 'Evaluations', 'Change Password']
                                 .map((item, index) => {
                                     return (
                                         <Nav.Link

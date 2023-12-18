@@ -8,14 +8,15 @@ export default function SelectCourse(props) {
     const [courses, setCourses] = useState([]);
     const {
         selectedExam, selectedDepartment,
-        setSelectedCourse
+        setSelectedCourse,
+        showAnyway
     } = props;
 
 
     useEffect(() => {
+        setSelectedCourse()
         setCourses([])
         if (selectedDepartment?.code) {
-            console.log('branches are selected', selectedDepartment)
             axios({
                 method: 'get',
                 url: GET_ALL_COURSES,
@@ -37,12 +38,11 @@ export default function SelectCourse(props) {
     }, [selectedDepartment, selectedExam])
 
 
-    if (!selectedDepartment?.code) return <></>
+    if (!showAnyway && !selectedDepartment?.code) return <></>
     return (
         <>
             <Dropdown className="d-inline" autoClose="inside" onSelect={(courseCode) => {
                 setSelectedCourse(courses.find(c => c.code === courseCode))
-                console.log("course selected", courseCode)
             }}>
                 <Dropdown.Toggle id="dropdown-autoclose-inside" style={{
                     wordWrap: 'break-word'

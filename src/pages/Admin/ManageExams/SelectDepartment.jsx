@@ -6,13 +6,15 @@ export default function SelectDepartment(props) {
     const {
         selectedExam,
         setSelectedDepartment,
+        showAnyway
     } = props;
 
     useEffect(() => {
+        setSelectedDepartment()
         setDepartments(selectedExam?.departments)
-    }, [selectedExam, setSelectedDepartment]);
+    }, [selectedExam]);
 
-    if (!selectedExam?.id) return <></>
+    if (!showAnyway && !selectedExam?.id) return <></>
     return (
         <>
             <Dropdown className="d-inline" autoClose="inside"

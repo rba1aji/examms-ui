@@ -72,10 +72,11 @@ export default function ViewExamMarks() {
                                         setExams([])
                                     }}
                                         value={semester}
-                                        className="text-center border-dark bg-azure"
+                                        className="text-center border-dark"
                                         min={1}
                                         style={{
-                                            borderRadius: '2px'
+                                            borderRadius: '2px',
+                                            backgroundColor: '#F3F8FF'
                                         }}
                                     />
                                 </Form.Group>
@@ -90,9 +91,10 @@ export default function ViewExamMarks() {
                                         setSelectedExamId(e.target.value)
                                         setMarks([])
                                     }}
-                                        className="border-dark bg-azure "
+                                        className="border-dark  "
                                         style={{
-                                            borderRadius: '2px'
+                                            borderRadius: '2px',
+                                            backgroundColor: '#F3F8FF'
                                         }}
                                     >
                                         <option value={''}>Select Exam</option>
@@ -128,7 +130,7 @@ export default function ViewExamMarks() {
                                 }
                             </tr>
                         </thead>
-                        <tbody className="bg-azure">
+                        <tbody style={{ backgroundClip: '#F3F8FF' }}>
                             {
                                 marks.map((itm, ind) => (
                                     <tr key={ind}>

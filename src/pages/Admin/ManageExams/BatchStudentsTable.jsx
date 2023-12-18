@@ -56,9 +56,8 @@ export default function BatchStudentsTable(props) {
                                     .map((item, index) => {
                                         return <th
                                             key={index}
-                                            className="bg-info"
                                             style={{
-                                                // backgroundColor: 'azure'
+                                                backgroundColor: '#F3F8FF'
                                             }}
                                         >
                                             {item}
