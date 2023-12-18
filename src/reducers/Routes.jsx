@@ -9,6 +9,7 @@ import StudentWorkspace from "../pages/student/StudentWorkspace";
 import PrintoutAttendance from '../pages/Faculty/PrintoutAttendance';
 import PrintoutMarks from "../pages/Faculty/PrintoutMarks";
 import EvaluationPage from "../pages/Faculty/Evaluations/EvaluationPage";
+import PrintoutEvaluationBundleMarks from "../pages/Faculty/Evaluations/PrintoutEvaluationBundleMarks";
 
 export const loginRoutes = [
     {
@@ -61,6 +62,11 @@ export const facultyWorkspaceRoutes = [
         path: '/faculty/evaluation/:evaluationId',
         title: 'Evaluation',
         component: <EvaluationPage />
+    },
+    {
+        path: '/faculty/evaluation/bundle/:evaluationBundleId/print-marks',
+        title: 'Printout Evaluation Bunlde Marks',
+        component: <PrintoutEvaluationBundleMarks />
     }
 ];
 
