@@ -9,6 +9,8 @@ export default function ChangePassword() {
     const [newPw, setNewPw] = useState('')
 
     function handleChangePassword(e) {
+        alert("Trust me it will work, Since its a demo I disabled it.")
+        return;
         e.preventDefault()
         axios({
             method: 'put',
@@ -50,7 +52,8 @@ export default function ChangePassword() {
                     />
                 </Form.Group>
                 <Button variant="info" type="submit"
-                    className='d-block ms-auto mt-4 px-3'>
+                    className='d-block ms-auto mt-4 px-3'
+                >
                     Change
                 </Button>
             </Form>
