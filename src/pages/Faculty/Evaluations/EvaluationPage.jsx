@@ -1,7 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { EVALUATION_BUNDLES_GET_ALL_FOR_EVALUATIONID } from "../../../reducers/ApiEndPoints"
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import Cookies from "js-cookie"
 import { Button, Card } from "react-bootstrap";
 import EvaluationPaperMarksEntry from "./EvaluationPaperMarksEntry"
@@ -52,37 +52,7 @@ export default function EvaluationPage() {
             <div className="d-flex flex-column px-2" style={{ width: '25%', height: '90vh', overflowY: 'scroll' }}>
                 <p className="mb-3">Total Evaluation Bundles : {evaluationBundles.length}</p>
                 {
-                    [...evaluationBundles].map((bundle, idx) =>
-                        <Card className={`mb-4` + (bundle.id == selectedBundle?.id ? ' bg-info' : '')}
-                            style={{
-                                backgroundColor: '#F3F8FF',
-                                fontSize: '12px'
-                            }}
-                            key={idx}
-                        >
-                            <Card.Body className="p-3 d-flex felx-row">
-                                <div className="d-flex flex-column" style={{ gap: '15px' }}>
-                                    <Card.Subtitle style={{ fontSize: '14px' }}>Bundle: {idx + 1}</Card.Subtitle>
-                                    <Card.Subtitle style={{ fontSize: '14px' }}>Papers Number: {bundle.evaluationPaperList[0].number + ' to ' + bundle.evaluationPaperList[bundle.evaluationPaperList?.length - 1].number}</Card.Subtitle>
-                                    {bundle.description && <Card.Subtitle style={{ fontSize: '14px' }}>Description: {bundle.description}</Card.Subtitle>}
-                                    <Card.Subtitle style={{ fontSize: '14px' }}>Completed: {bundle.evaluationPaperList?.filter(i => i.submitted)?.length}/{bundle.evaluationPaperList.length}</Card.Subtitle>
-                                </div>
-                                <div className="d-block ms-auto my-auto">
-                                    {bundle.id != selectedBundle?.id &&
-                                        <Button
-                                            variant={bundle?.disableEntry ? "danger" : "info"}
-                                            disabled={bundle?.disableEntry}
-                                            onClick={() => {
-                                                setSelectedBundle(bundle)
-                                                Cookies.set('selectedBundleIndex', idx)
-                                            }}
-                                            style={{ fontSize: '12px' }}
-                                        >{bundle?.disableEntry ? "Disabled" : 'Evaluate >'}</Button>
-                                    }
-                                </div>
-                            </Card.Body>
-                        </Card>
-                    )
+                    [...evaluationBundles].map((bundle, idx) => <EvaluationBundleCard bundle={bundle} selectedBundle={selectedBundle} setSelectedBundle={setSelectedBundle} idx={idx} />)
                 }
             </div>
             <div style={{ width: '75%' }} className="px-5">
@@ -99,4 +69,50 @@ export default function EvaluationPage() {
             </div>
         </div >
     </>
+}
+
+
+function EvaluationBundleCard(props) {
+    const { bundle, idx, selectedBundle, setSelectedBundle } = props;
+
+    const completedPapersCount = bundle.evaluationPaperList?.filter(i => i.submitted)?.length;
+    const totalPapersCount = bundle.evaluationPaperList.length;
+
+    return <Card className={`mb-4` + (bundle.id == selectedBundle?.id ? ' bg-info' : '')}
+        style={{
+            backgroundColor: '#F3F8FF',
+            fontSize: '12px'
+        }}
+        key={idx}
+    >
+        <Card.Body className="p-3 d-flex felx-row">
+            <div className="d-flex flex-column" style={{ gap: '15px' }}>
+                <Card.Subtitle style={{ fontSize: '14px' }}>Bundle: {idx + 1}</Card.Subtitle>
+                <Card.Subtitle style={{ fontSize: '14px' }}>Papers Number: {bundle.evaluationPaperList[0].number + ' to ' + bundle.evaluationPaperList[bundle.evaluationPaperList?.length - 1].number}</Card.Subtitle>
+                {bundle.description && <Card.Subtitle style={{ fontSize: '14px' }}>Description: {bundle.description}</Card.Subtitle>}
+                <Card.Subtitle style={{ fontSize: '14px' }}>Completed: {completedPapersCount}/{totalPapersCount}</Card.Subtitle>
+            </div>
+            <div className="d-flex flex-column ms-auto my-auto" style={{ gap: '7.5px' }}>
+                {bundle.id != selectedBundle?.id &&
+                    <Button
+                        variant={bundle?.disableEntry ? "danger" : "info"}
+                        disabled={bundle?.disableEntry}
+                        onClick={() => {
+                            setSelectedBundle(bundle)
+                            Cookies.set('selectedBundleIndex', idx)
+                        }}
+                        style={{ fontSize: '12px' }}
+                    >{bundle?.disableEntry ? "Disabled" : 'Evaluate >'}</Button>
+                }
+                {
+                    // totalPapersCount === completedPapersCount &&
+                    <Button style={{ fontSize: '12px' }} variant={"dark"}
+                        as={Link}
+                        to={`/faculty/evaluation/bundle/${bundle.id}/print-marks/`}
+                        target="_blank"
+                    >{`Print Out`}</Button>
+                }
+            </div>
+        </Card.Body>
+    </Card >
 }
