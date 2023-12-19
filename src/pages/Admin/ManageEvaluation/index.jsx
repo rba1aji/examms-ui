@@ -6,6 +6,7 @@ import SelectDepartment from "../ManageExams/SelectDepartment";
 import CreateEvaluation from "./CreateEvaluation";
 import axios from "axios";
 import { EVALUATION_GET_ALL } from "../../../reducers/ApiEndPoints";
+import ManageOptions from "./ManageOptions";
 
 export default function ManageEvaluation() {
     const [selectedExam, setSelectedExam] = useState();
@@ -60,7 +61,7 @@ export default function ManageEvaluation() {
                     <thead>
                         <tr>
                             {
-                                ["Evaluation", "Papers number", "Faculty", "Status"]
+                                ["Evaluation", "Papers number", "Faculty", "Status", ""]
                                     .map((item, idx) =>
                                         <td key={idx} className="bg-info">{item}</td>
                                     )
@@ -76,7 +77,8 @@ export default function ManageEvaluation() {
                                             (idx + 1) + ' ' + (evaluation.description ?? ''),
                                             evaluation.startPaperNumber + " to " + evaluation.endPaperNumber,
                                             evaluation.faculty.fullName + ' (' + evaluation.faculty.username + ')',
-                                            ''
+                                            '',
+                                            <ManageOptions evaluationId={evaluation.id} />
                                         ].map((item, indx) =>
                                             < td key={indx}>
                                                 {item}
