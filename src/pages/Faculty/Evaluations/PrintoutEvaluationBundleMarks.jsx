@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { PDFViewer } from '@react-pdf/renderer';
 import { useParams } from 'react-router-dom';
-import { numbersToWords, displayDDMMYYY, numToRoman } from '../../../reducers/Utils';
+import { numbersToWords, numToRoman } from '../../../reducers/Utils';
 import axios from 'axios';
 import { EVALUATION_BUNDLE_GET, GET_ALL_MARKS } from '../../../reducers/ApiEndPoints';
 import Cookies from 'js-cookie';
 
 export default function PrintoutEvaluationBundleMarks() {
+    const [evaluationBundle, setEvaluationBundle] = useState()
     const [evaluation, setEvaluation] = useState()
     const [marks, setMarks] = useState([])
     const { evaluationBundleId } = useParams();
@@ -23,6 +24,7 @@ export default function PrintoutEvaluationBundleMarks() {
                 Authorization: 'Bearer ' + Cookies.get('authtoken')
             }
         }).then(res => {
+            setEvaluationBundle(res?.data?.data)
             setEvaluation(res?.data?.data?.evaluation)
         }).catch(err => {
             alert(err?.response?.data?.message ?? "Some error occurred!")
@@ -48,6 +50,9 @@ export default function PrintoutEvaluationBundleMarks() {
         })
     }, [evaluationBundleId])
 
+    // if (evaluationBundle?.disablePrintout) {
+    //     return <><br /><br />Not Allowed</>
+    // }
     return (
         <div className='pt-3 bg-dark'>
             {/* {evaluation?.disableMarksEntry ?
