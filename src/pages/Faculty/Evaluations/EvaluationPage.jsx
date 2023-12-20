@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { EVALUATION_BUNDLES_GET_ALL_FOR_EVALUATIONID } from "../../../reducers/ApiEndPoints"
+import { EVALUATION_BUNDLES_GET_ALL_FOR_EVALUATIONID, EVALUATION_BUNDLE_ENABLE_DISABLE_PRINTOUT } from "../../../reducers/ApiEndPoints"
 import { Link, useParams } from "react-router-dom"
 import Cookies from "js-cookie"
 import { Button, Card } from "react-bootstrap";
@@ -14,6 +14,27 @@ export default function EvaluationPage() {
     const [selectedPaper, setSelectedPaper] = useState()
     const [questionPaper, setQuestionPaper] = useState()
     const [selectedPaperIdx, setSelectedPaperIdx] = useState(0)
+    const [renderPage, setRenderPage] = useState(0)
+
+    async function disablePrintout(bundleId) {
+        await axios({
+            method: 'PUT',
+            url: EVALUATION_BUNDLE_ENABLE_DISABLE_PRINTOUT,
+            data: {
+                evaluationBundleId: [bundleId],
+                disablePrintout: true
+            },
+            headers: {
+                Authorization: 'Bearer ' + Cookies.get('authtoken')
+            }
+        }).then(res => {
+            console.log(res?.data?.message)
+        }).catch(err => {
+            alert(err?.response?.data?.message ?? 'Something went wrong')
+            console.log(err)
+        })
+        setRenderPage(prev => prev + 1)
+    }
 
     useEffect(() => {
         axios({
@@ -37,7 +58,7 @@ export default function EvaluationPage() {
             }).catch(err => {
                 alert(err?.response?.data?.message ?? "Something went wrong")
             })
-    }, [])
+    }, [renderPage])
 
     useEffect(() => {
         if (selectedPaperIdx != 0 && selectedPaperIdx % 5 == 0) {
@@ -52,7 +73,7 @@ export default function EvaluationPage() {
             <div className="d-flex flex-column px-2" style={{ width: '25%', height: '90vh', overflowY: 'scroll' }}>
                 <p className="mb-3">Total Evaluation Bundles : {evaluationBundles.length}</p>
                 {
-                    [...evaluationBundles].map((bundle, idx) => <EvaluationBundleCard bundle={bundle} selectedBundle={selectedBundle} setSelectedBundle={setSelectedBundle} idx={idx} />)
+                    [...evaluationBundles].map((bundle, idx) => <EvaluationBundleCard bundle={bundle} selectedBundle={selectedBundle} setSelectedBundle={setSelectedBundle} disablePrintout={disablePrintout} idx={idx} />)
                 }
             </div>
             <div style={{ width: '75%' }} className="px-5">
@@ -73,7 +94,7 @@ export default function EvaluationPage() {
 
 
 function EvaluationBundleCard(props) {
-    const { bundle, idx, selectedBundle, setSelectedBundle } = props;
+    const { bundle, idx, selectedBundle, setSelectedBundle, disablePrintout } = props;
 
     const completedPapersCount = bundle.evaluationPaperList?.filter(i => i.submitted)?.length;
     const totalPapersCount = bundle.evaluationPaperList.length;
@@ -105,11 +126,13 @@ function EvaluationBundleCard(props) {
                     >{bundle?.disableEntry ? "Disabled" : 'Evaluate >'}</Button>
                 }
                 {
-                    // totalPapersCount === completedPapersCount &&
+                    totalPapersCount === completedPapersCount &&
+                    bundle.disablePrintout != true &&
                     <Button style={{ fontSize: '12px' }} variant={"dark"}
                         as={Link}
                         to={`/faculty/evaluation/bundle/${bundle.id}/print-marks/`}
                         target="_blank"
+                        onClick={() => { disablePrintout(bundle.id) }}
                     >{`Print Out`}</Button>
                 }
             </div>
