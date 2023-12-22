@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { PDFViewer } from '@react-pdf/renderer';
 import { useParams } from 'react-router-dom';
-import { numbersToWords, numToRoman } from '../../../reducers/Utils';
+import { displayDDMMYYY, numbersToWords, numToRoman } from '../../../reducers/Utils';
 import axios from 'axios';
 import { EVALUATION_BUNDLE_GET, GET_ALL_MARKS } from '../../../reducers/ApiEndPoints';
 import Cookies from 'js-cookie';
@@ -113,7 +113,7 @@ function MyDocument(props) {
                                 Date :
                             </Text>
                             <Text style={{ ...styles.th, border: '0' }}>
-                                {/* {displayDDMMYYY(new Date(evaluation?.startTime))} */}
+                                {displayDDMMYYY(new Date())}
                             </Text>
                         </View>
 
@@ -143,22 +143,24 @@ function MyDocument(props) {
                         }
 
                         <View style={{ ...styles.tr }}>
-                            <Text style={{ ...styles.td, width: '80%' }}>Evaluator</Text>
+                            <Text style={{ ...styles.td, width: '100%' }}></Text>
                             <Text style={{ ...styles.td, width: '200%' }}>Faculty Name</Text>
-                            <Text style={{ ...styles.td, width: '160%' }}>Designation</Text>
+                            <Text style={{ ...styles.td, width: '140%' }}>Designation</Text>
                             <Text style={{ ...styles.td, width: '120%' }}>Signature</Text>
                         </View>
+                        {
+                            ['Internal Examiner', 'Chief Examiner', 'Chairman'].map((item, idx) =>
+                                <View style={styles.tr} key={idx}>
+                                    <Text style={{ ...styles.td, width: '100%', paddingTop: '5px', paddingBottom: '5px' }}>{item}</Text>
+                                    <Text style={{ ...styles.td, width: '200%', paddingTop: '5px', paddingBottom: '5px' }}></Text>
+                                    <Text style={{ ...styles.td, width: '140%', paddingTop: '5px', paddingBottom: '5px' }}></Text>
+                                    <Text style={{ ...styles.td, width: '120%', paddingTop: '5px', paddingBottom: '5px' }}></Text>
+                                </View>
+                            )
+                        }
                         <View style={styles.tr}>
-                            <Text style={{ ...styles.td, width: '80%', paddingTop: '5px', paddingBottom: '5px' }}>Evaluator 1</Text>
-                            <Text style={{ ...styles.td, width: '200%', paddingTop: '5px', paddingBottom: '5px' }}></Text>
-                            <Text style={{ ...styles.td, width: '160%', paddingTop: '5px', paddingBottom: '5px' }}></Text>
-                            <Text style={{ ...styles.td, width: '120%', paddingTop: '5px', paddingBottom: '5px' }}></Text>
-                        </View>
-                        <View style={styles.tr}>
-                            <Text style={{ ...styles.td, width: '80%', paddingTop: '5px', paddingBottom: '5px' }}>Evaluator 2</Text>
-                            <Text style={{ ...styles.td, width: '200%', paddingTop: '5px', paddingBottom: '5px' }}></Text>
-                            <Text style={{ ...styles.td, width: '160%', paddingTop: '5px', paddingBottom: '5px' }}></Text>
-                            <Text style={{ ...styles.td, width: '120%', paddingTop: '5px', paddingBottom: '5px' }}></Text>
+                            <Text style={{ ...styles.td, width: '21.75%', paddingTop: '5px', paddingBottom: '5px' }}>DEO</Text>
+                            <Text style={{ ...styles.td, paddingTop: '5px', paddingBottom: '5px' }}></Text>
                         </View>
                     </View>
                 </Page>
