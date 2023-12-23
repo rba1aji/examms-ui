@@ -1,9 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Table } from "react-bootstrap";
-import { CONFIGURATIONS_GET_ALL } from "../../../reducers/ApiEndPoints";
+import { CONFIGURATIONS_GET_ALL, CONFIGURATION_DELETE } from "../../../reducers/ApiEndPoints";
 import Cookies from "js-cookie";
 import AddQuestionPaperConfiguration from "./AddQuestionPaperConfiguration";
+import { BlackDustbin } from "../../../assets/svgicons";
 
 export default function ManageConfigurations() {
     const [availableConfigs, setAvailableConfigs] = useState([])
@@ -34,7 +35,7 @@ export default function ManageConfigurations() {
                 <thead>
                     <tr>
                         {
-                            ['S no', 'Name', 'Type', 'Last Modified At', 'Configuration']
+                            ['S no', 'Name', 'Type', 'Last Modified At', 'Configuration', 'Delete']
                                 .map((item, idx) =>
                                     <th key={idx} className="bg-info">{item}</th>
                                 )
@@ -46,7 +47,9 @@ export default function ManageConfigurations() {
                         availableConfigs?.map((item, idx) =>
                             <tr key={idx}>
                                 {
-                                    [idx + 1, item?.name, item.type, new Date(item.lastModifiedDate).toLocaleString() ?? '', item.configJson]
+                                    [idx + 1, item?.name, item.type, new Date(item.lastModifiedDate).toLocaleString() ?? '', item.configJson,
+                                    <BlackDustbin onClick={() => confirm("Deleting Configuration... Sure?") && deleteConfiguration(item.id)} />
+                                    ]
                                         .map((td, idxx) =>
                                             <td key={idxx}>{td}</td>
                                         )
@@ -58,4 +61,22 @@ export default function ManageConfigurations() {
             </Table>
         </div>
     </div>
+}
+
+async function deleteConfiguration(configId) {
+    await axios({
+        method: 'DELETE',
+        url: CONFIGURATION_DELETE,
+        params: {
+            configurationId: configId
+        },
+        headers: {
+            Authorization: "Bearer " + Cookies.get('authtoken')
+        }
+    }).then(res => {
+        alert(res?.data?.message)
+    }).catch(err => {
+        alert(err?.response?.data?.message)
+        console.log(e)
+    })
 }

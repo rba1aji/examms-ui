@@ -33,6 +33,7 @@ export const GET_STUDENT_PROFILE = BASE_URL + "/student/v1/get-profile";
 export const EXAM_MARKS_REPORT = BASE_URL + "/report/v1/exam-marks-report";
 
 export const EVALUATION_CREATE = BASE_URL + "/evaluation/v1/create-evaluation-for-course"
+export const EVALUATION_DELETE = BASE_URL + "/evaluation/v1/delete-evaluation"
 export const EVALUATION_GET_ALL = BASE_URL + "/evaluation/v1/get-all-evaluation"
 export const EVALUATION_BUNDLES_GET_ALL_FOR_EVALUATIONID = BASE_URL + "/evaluation-bundle/v1/get-all-evaluation-bundle-for-evaluation";
 export const EVALUATION_BUNDLE_GET = BASE_URL + "/evaluation-bundle/v1/get-evaluation-bundle";
@@ -42,3 +43,4 @@ export const EVALUATION_PAPERS_ENABLE_ENTRY = BASE_URL + "/evaluation-paper/v1/e
 export const EVALUATION_PAPER_SUBMIT_MARKS = (evaluationId, paperId) => BASE_URL + `/evaluation-paper/v1/submit-evaluation-paper-marks/${evaluationId}/${paperId}`
 export const CONFIGURATIONS_GET_ALL = BASE_URL + "/configuration/v1/get-all-configuration"
 export const CONFIGURATIONS_ADD_UPDATE = BASE_URL + "/configuration/v1/add-update-configuration"
+export const CONFIGURATION_DELETE = BASE_URL + "/configuration/v1/delete-configuration"
