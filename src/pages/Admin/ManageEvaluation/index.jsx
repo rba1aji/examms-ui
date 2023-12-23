@@ -7,6 +7,7 @@ import CreateEvaluation from "./CreateEvaluation";
 import axios from "axios";
 import { EVALUATION_GET_ALL } from "../../../reducers/ApiEndPoints";
 import ManageOptions from "./ManageOptions";
+import Cookies from "js-cookie";
 
 export default function ManageEvaluation() {
     const [selectedExam, setSelectedExam] = useState();
@@ -22,6 +23,9 @@ export default function ManageEvaluation() {
                 params: {
                     examId: selectedExam?.id,
                     courseId: selectedCourse?.id
+                },
+                headers: {
+                    Authorization: 'Bearer ' + Cookies.get('authtoken')
                 }
             }).then(res => {
                 setEvaluations(res?.data?.data)
