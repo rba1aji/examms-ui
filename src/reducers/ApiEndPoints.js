@@ -33,6 +33,7 @@ export const GET_STUDENT_PROFILE = BASE_URL + "/student/v1/get-profile";
 export const EXAM_MARKS_REPORT = BASE_URL + "/report/v1/exam-marks-report";
 
 export const EVALUATION_CREATE = BASE_URL + "/evaluation/v1/create-evaluation-for-course"
+export const EVALUATION_DELETE = BASE_URL + "/evaluation/v1/delete-evaluation"
 export const EVALUATION_GET_ALL = BASE_URL + "/evaluation/v1/get-all-evaluation"
 export const EVALUATION_BUNDLES_GET_ALL_FOR_EVALUATIONID = BASE_URL + "/evaluation-bundle/v1/get-all-evaluation-bundle-for-evaluation";
 export const EVALUATION_BUNDLE_GET = BASE_URL + "/evaluation-bundle/v1/get-evaluation-bundle";
