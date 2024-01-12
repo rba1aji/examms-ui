@@ -8,7 +8,7 @@ import Cookies from 'js-cookie';
 import SelectConfigurationV2 from '../ManageConfigurations/SelectConfigurationV2';
 
 function MyVerticallyCenteredModal(props) {
-    const { onHide, selectedExam, selectedCourse } = props;
+    const { onHide, selectedExam, selectedCourse, setRefreshEvaluations } = props;
     const [selectedFaculty, setSelectedFaculty] = useState()
     const [startPaperNumber, setStartPaperNumber] = useState();
     const [endPaperNumber, setEndPaperNumber] = useState()
@@ -35,6 +35,7 @@ function MyVerticallyCenteredModal(props) {
             }
         }).then(res => {
             alert(res?.data?.message)
+            setRefreshEvaluations(prev => prev + 1)
         }).catch(err => {
             alert(err?.response?.data?.message ?? "Something went wrong!")
         })
