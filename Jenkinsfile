@@ -31,8 +31,8 @@ pipeline {
         stage('Sonarqube') {
             steps {
                 withSonarQubeEnv('sonar-server'){
-                   sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=event-management-app \
-                   -Dsonar.projectKey=event-management-app  '''
+                   sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=exam-ui-app \
+                   -Dsonar.projectKey=exam-ui-app '''
                }
             }
         }
@@ -41,8 +41,8 @@ pipeline {
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker build -t event-management:latest ."
-                        sh "docker tag  event-management:latest kubegourav/event-management:latest"
+                        sh "docker build -t exam-app ."
+                        sh "docker tag  exam-app kubegourav/exam-ui-app:latest"
                     }
                 }
             }
@@ -50,7 +50,7 @@ pipeline {
 
        stage('Trrivy Image Scan') {
             steps {
-                sh "trivy image kubegourav/event-management:latest"
+                sh "trivy image kubegourav/exam-ui-app:latest"
             }
         }
         
@@ -58,7 +58,7 @@ pipeline {
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker push kubegourav/event-management:latest"
+                        sh "docker push kubegourav/exam-ui-app:latest"
                     }
                 }
             }
