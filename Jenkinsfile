@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/viddhant1205/examms-ui.git'
+                git branch: 'main', url: 'https://github.com/username/examms-ui.git'
             }
         }
 
@@ -42,7 +42,7 @@ pipeline {
                 script{
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
                         sh "docker build -t exam-app ."
-                        sh "docker tag  exam-app kubegourav/exam-ui-app:latest"
+                        sh "docker tag  exam-app Dockerhub-username/exam-ui-app:latest"
                     }
                 }
             }
@@ -50,7 +50,7 @@ pipeline {
 
        stage('Trrivy Image Scan') {
             steps {
-                sh "trivy image kubegourav/exam-ui-app:latest"
+                sh "trivy image Dockerhub-username/exam-ui-app:latest"
             }
         }
         
@@ -58,7 +58,7 @@ pipeline {
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker push kubegourav/exam-ui-app:latest"
+                        sh "docker push Dockerhub-username/exam-ui-app:latest"
                     }
                 }
             }
@@ -68,7 +68,7 @@ pipeline {
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker run -d --name=Exam-Ui-App -p 3000:80 kubegourav/exam-ui-app:latest"
+                        sh "docker run -d --name=Exam-Ui-App -p 3000:80 Dockerhub-username/exam-ui-app:latest"
                     }
                 }
             }
