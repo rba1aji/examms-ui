@@ -68,7 +68,7 @@ pipeline {
             steps {
                 script{
                     withDockerRegistry(credentialsId: 'docker-cred', toolName: 'docker') {
-                        sh "docker run -d -p 3000:80 kubegourav/event-management:latest"
+                        sh "docker run -d --name=Exam-Ui-App -p 3000:80 kubegourav/exam-ui-app:latest"
                     }
                 }
             }
