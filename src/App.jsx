@@ -9,6 +9,18 @@ import Cookies from 'js-cookie';
 
 function App() {
 
+  function saveVisitor(details) {
+    axios({
+      method: "post",
+      url: SAVE_VISITOR,
+      data: {
+        details: JSON.stringify(details),
+      }
+    }).then(() => {
+      Cookies.set("visitor_saved", "1")
+    })
+  }
+
   useEffect(() => {
     if (Cookies.get("visitor_saved") === "1")
       return
@@ -21,17 +33,11 @@ function App() {
     }
 
     navigator.geolocation.getCurrentPosition((position) => {
-      details.latitude = position.coords.latitude
-      details.longitude = position.coords.longitude
-      axios({
-        method: "post",
-        url: SAVE_VISITOR,
-        data: {
-          details: JSON.stringify(details),
-        }
-      }).then(() => {
-        Cookies.set("visitor_saved", "1")
-      })
+      details.latitude = position?.coords.latitude
+      details.longitude = position?.coords.longitude
+      saveVisitor(details)
+    }, () => {
+      saveVisitor(details)
     })
   }, [])
 
