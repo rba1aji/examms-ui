@@ -5,7 +5,8 @@ export default function Home() {
             <div className="text-center h3 mt-2">Welcome to examms!</div>
             <br />
             <div style={{ fontSize: '12px', display: 'flex', justifyContent: 'center' }}>
-                When you do login, server may take some time to respond the first request, please keep waiting. It will work!
+                {/* When you do login, server may take some time to respond the first request, please keep waiting. It will work! */}
+                <a href="https://exammsdev.vercel.app" className="me-1">Click</a> to open live version of the project.
             </div>
             <div style={{ fontSize: '14px', minHeight: '50vh', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'flex-row', gap: "100px" }}>
                 <div>
