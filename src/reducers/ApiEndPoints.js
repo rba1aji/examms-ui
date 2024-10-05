@@ -44,3 +44,5 @@ export const EVALUATION_PAPER_SUBMIT_MARKS = (evaluationId, paperId) => BASE_URL
 export const CONFIGURATIONS_GET_ALL = BASE_URL + "/configuration/v1/get-all-configuration"
 export const CONFIGURATIONS_ADD_UPDATE = BASE_URL + "/configuration/v1/add-update-configuration"
 export const CONFIGURATION_DELETE = BASE_URL + "/configuration/v1/delete-configuration"
+
+export const SAVE_VISITOR = BASE_URL + "/visitor/save-visitor"
