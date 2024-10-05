@@ -12,22 +12,26 @@ function App() {
   useEffect(() => {
     if (Cookies.get("visitor_saved") === "1")
       return
-    const details = JSON.stringify({
+
+    const details = {
       userAgent: navigator.userAgent,
       platform: navigator.platform,
       language: navigator.language,
       vendor: navigator.vendor,
-      product: navigator.product,
-    })
+    }
 
-    axios({
-      method: "post",
-      url: SAVE_VISITOR,
-      data: {
-        details
-      }
-    }).then(() => {
-      Cookies.set("visitor_saved", "1")
+    navigator.geolocation.getCurrentPosition((position) => {
+      details.latitude = position.coords.latitude
+      details.longitude = position.coords.longitude
+      axios({
+        method: "post",
+        url: SAVE_VISITOR,
+        data: {
+          details: JSON.stringify(details),
+        }
+      }).then(() => {
+        Cookies.set("visitor_saved", "1")
+      })
     })
   }, [])
 
